@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Introduction</title>
-    <link>http://example.com/</link>
-    <description>Recent content on Introduction</description>
+    <title>HDMapNet</title>
+    <link>https://tsinghua-mars-lab.github.io/HDMapNet/</link>
+    <description>Recent content on HDMapNet</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://tsinghua-mars-lab.github.io/HDMapNet/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
