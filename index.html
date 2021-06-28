@@ -26,8 +26,6 @@ Hdmap Net
 
 
 
-<meta property="og:image" content="https://tsinghua-mars-lab.github.io/HDMapNet/home/overview_v2.png"/>
-
 
 
 
@@ -142,6 +140,12 @@ Hdmap Net
             
             
             
+            <a class="navbar-item" href="#main_idea">Main Idea</a>
+            
+            
+            
+            
+            
             <a class="navbar-item" href="#result">Result</a>
             
             
@@ -216,18 +220,74 @@ High-definition map (HD map) construction is a crucial problem for autonomous dr
         
 
         
+        <div class="section" id="main_idea">
+            <div class="container">
+                <h2 class="title is-2 has-text-centered">Main Idea</h2>
+                
+                <div class="markdown has-text-centered">
+                    <figure>
+<img src="images/overview_v2.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
+<figcaption style="text-align:center">
+<b>The overview of HDMapNet</b>. Four neural network parameterize our model: a perspective view image encoder, a neural view transformer in image branch, a pillar-based point cloud encoder, and a map element decoder. The output of the map decoder has 3 branches: semantic segmentation, instance detection and direction classification, which are processed into vectorized HD map.
+</figcaption>
+</figure>
+                </div>
+                
+            </div>
+            
+            <div class="container has-text-centered top-pad">
+    <a href="#top">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        
         <div class="section" id="result">
             <div class="container">
                 <h2 class="title is-2 has-text-centered">Result</h2>
                 
                 <div class="markdown has-text-centered">
                     <DIV align="left">
+We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM with bird's eye view encoder (IPM(B)), IPM with cam view encoder and bird's eye view encoder (IPM(CB)), <a ref="https://arxiv.org/pdf/2008.05711.pdf">Lift-Splat-Shoot</a> and <a ref="https://arxiv.org/pdf/1906.03560.pdf">View Prasing Network</a>.
 <DIV>
 
-<h2 id="qualitative-results" class="anchor-link"><a href="#qualitative-results">Qualitative results</a></h2>
-<p><img src="images/qualitative.png" alt=""></p>
+<h3 id="quantative-results" class="anchor-link"><a href="#quantative-results">Quantative results</a></h3>
+<figure>
+<img src="images/segmentation.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
+<figcaption style="text-align:center">
+<b>IoU scores(%) and Chamfer Distance(m) of semantic map segmentation.</b> CD<sub>P</sub> denotes the CD from label to prediction (equivalent to precision), CP<sub>L</sub> denotes the CD from Prediction to Label (equivalent to recall); CD is the average of them. *: the perspective view labels projected from 2D HD Maps.
+</figcaption>
+</figure>
+<br>
+<figure>
+<img src="images/instance.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
+<figcaption style="text-align:center">
+<b>Instance detection results.</b> {0.2, 0.5, 1} are the predefined thresholds of Chamfer distance (e.g., a prediction is considierer a true positive if the Chamfer distance between label and prediction is lower than that threshold.) The mAP is the average of three APs.
+</figcaption>
+</figure>
+<br>
 
-<h2 id="video-demo" class="anchor-link"><a href="#video-demo">Video demo</a></h2>
+<h3 id="qualitative-results" class="anchor-link"><a href="#qualitative-results">Qualitative results</a></h3>
+<figure>
+<img src="images/qualitative.png" style="padding:0px; margin:0px">
+<figcaption style="text-align:center">
+<b>The qualitative results on nuScenes dataset.</b> Top Left: we show the surrounding images and the ground-truth local HD Map annotations. IPM: we show the lane segmentation result in the perspective view and in the bird's-eye view. Others: we show the semantic segmentation results and the vectorized instance detection results. As we can see, Our HDMapNet(Surr) and HDMapNet(Fusion) outputs are close to the ground-truth HD Map and the fusion based HDMapNet is clearly the best.
+</figcaption>
+</figure>
+
+<h3 id="video-demo" class="anchor-link"><a href="#video-demo">Video demo</a></h3>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://player.vimeo.com/video/568295323" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="vimeo video" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
