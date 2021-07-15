@@ -11,7 +11,7 @@
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="An Online HD Map Construction and Evaluation Framework">
 <title>
-HdMapNet
+HDMapNet
 </title>
 
 <link href="/HDMapNet/index.xml" rel="alternate" type="application/rss+xml" title="HDMapNet" />
@@ -195,11 +195,7 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
                 <h2 class="title is-2 has-text-centered">Demo</h2>
                 
                 <div class="markdown has-text-centered">
-                    <video controls preload="auto" width="100%"  autoplay loop playsinline class="html-video">
-    <source src="/HDMapNet/home/direction_3_car_short.mp4" type="video/mp4">
-  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="/HDMapNet/home/direction_3_car_short.mp4">download it</a> and watch it with your favorite video player!</p>
-</video>
-<table frame=void style="border:none">
+                    <table frame=void style="border:none">
 <tr>
 <td style="background-color:#FFFFFF; border:none"><img src="images/scene0_car.gif"></td>
 <td style="background-color:#FFFFFF; border:none"><img src="images/scene2_car.gif"></td>
@@ -294,11 +290,7 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
                 <h2 class="title is-2 has-text-centered">Result</h2>
                 
                 <div class="markdown has-text-centered">
-                    <DIV align="left">
-We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM with bird's eye view encoder (IPM(B)), IPM with cam view encoder and bird's eye view encoder (IPM(CB)), <a href="https://arxiv.org/pdf/2008.05711.pdf">Lift-Splat-Shoot</a> and <a href="https://arxiv.org/pdf/1906.03560.pdf">View Prasing Network</a>.
-<DIV>
-<br>
-<!-- 
+                    <!-- 
 ### Quantative results
 
 <figure>
@@ -318,8 +310,17 @@ We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM wit
 
 <br> 
 -->
-
-<h3 id="qualitative-results" class="anchor-link"><a href="#qualitative-results">Qualitative results</a></h3>
+<video controls preload="auto" width="100%"  autoplay loop playsinline class="html-video">
+    <source src="/HDMapNet/home/direction_3_car_short.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="/HDMapNet/home/direction_3_car_short.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<DIV align="left">
+<b>The HD map construct demo on nuScenes dataset.</b> The left part is the corresonding 6 images, the right one is the HD map prediction. We align the LiDAR point clouds on it for visualization purpose.
+<DIV>
+<!-- <DIV align="left">
+We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM with bird's eye view encoder (IPM(B)), IPM with cam view encoder and bird's eye view encoder (IPM(CB)), <a href="https://arxiv.org/pdf/2008.05711.pdf">Lift-Splat-Shoot</a> and <a href="https://arxiv.org/pdf/1906.03560.pdf">View Prasing Network</a>.
+<DIV> -->
+<br>
 <figure>
 <img src="images/qualitative.png" style="padding:0px; margin:0px">
 <figcaption style="text-align:left">
