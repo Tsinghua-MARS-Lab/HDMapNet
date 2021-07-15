@@ -9,7 +9,7 @@
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
-<meta name="description" content="Website Description">
+<meta name="description" content="An Online HD Map Construction and Evaluation Framework">
 <title>
 Hdmap Net
 </title>
@@ -19,7 +19,7 @@ Hdmap Net
         
         <meta property="og:title" content="HDMapNet" />
 <meta property="og:type" content="website" />
-<meta property="og:description" content="Website Description"/>
+<meta property="og:description" content="An Online HD Map Construction and Evaluation Framework"/>
 <meta property="og:url" content="https://tsinghua-mars-lab.github.io/HDMapNet/"/>
 <meta property="og:site_name" content="HDMapNet"/>
 
@@ -54,7 +54,7 @@ Hdmap Net
 
     <body>
         
-        <section id="top" class="hero is-fullheight">
+        <section id="top" class="hero is-small">
             
             <div class="hero-head"></div>
 
@@ -62,19 +62,11 @@ Hdmap Net
             <div class="hero-body">
                 <div class="container has-text-centered">
                     
-                    <h1 class="bold-title fade-in one">
+                    <h1 class="bold-title " style="font-size: 3em">
                         HDMapNet
                     </h1>
-                    <div class="subtitle is-3 fade-in two">
+                    <div class="subtitle is-3 ">
                         <p>An Online HD Map Construction and Evaluation Framework</p>
-<div class="social-icons">
-    <a href="https://arxiv.org/">
-        <i class="fas fab fa-sticky-note"></i>
-    </a>
-    <a href="https://github.com/Tsinghua-MARS-Lab/HDMapNet-dev">
-        <i class="fab fab fa-github"></i>
-    </a>
-</div>
 <DIV style="font-size: large">
 <br>
 Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><sup>2</sup>, <a href="https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/">Yilun Wang</a><sup>3</sup>, <a href="http://people.csail.mit.edu/hangzhao/">Hang Zhao</a><sup>1</sup>
@@ -84,6 +76,14 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
 <!-- <a href="mailto:liqi17@mails.tsinghua.edu.cn">liqi17@mails.tsinghua.edu.cn</a> -->
 <DIV>
 <br>
+<div class="social-icons">
+    <a href="https://arxiv.org/abs/2107.06307/">
+        <i class="fas fab fa-sticky-note" style="font-size:35px"></i>
+    </a>
+    <a href="https://github.com/Tsinghua-MARS-Lab/HDMapNet-dev">
+        <i class="fab fab fa-github" style="font-size: 35px"></i>
+    </a>
+</div>
 <video controls preload="auto" width="100%"  autoplay loop playsinline class="html-video">
     <source src="/HDMapNet/home/direction_3_car_short.mp4" type="video/mp4">
   <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="/HDMapNet/home/direction_3_car_short.mp4">download it</a> and watch it with your favorite video player!</p>
@@ -98,7 +98,7 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
             </div> 
             
 
-            <div class="hero-foot fade-in three">
+            <div class="hero-foot ">
                 
                 
 <div class="container">
@@ -126,7 +126,7 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
             
             
             
-            <a class="navbar-item" href="#abstract">Abstract</a>
+            <a class="navbar-item" href="#demo">Demo</a>
             
             
             
@@ -134,7 +134,13 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
             
             
             
-            <a class="navbar-item" href="#main_idea">Main Idea</a>
+            <a class="navbar-item" href="#abstract">Main idea</a>
+            
+            
+            
+            
+            
+            <a class="navbar-item" href="#main_idea">Method</a>
             
             
             
@@ -162,9 +168,6 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
 
             
             
-            <a class="navbar-item" href="https://tsinghua-mars-lab.github.io/HDMapNet/index.xml"><i class="fas fa-rss"></i></a>
-            
-            
         </div>
     </nav>
     <hr>
@@ -188,14 +191,23 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
         
 
         
-        <div class="section" id="abstract">
+        <div class="section" id="demo">
             <div class="container">
-                <h2 class="title is-2 has-text-centered">Abstract</h2>
+                <h2 class="title is-2 has-text-centered">Demo</h2>
                 
                 <div class="markdown has-text-centered">
-                    <DIV align="left">
-High-definition map (HD map) construction is a crucial problem for autonomous driving. This problem typically involves collecting high-quality point clouds, fusing multiple point clouds of the same scene, annotating map elements, and updating maps constantly. This pipeline, however, requires a vast amount of human efforts and resources which limits its scalability. Additionally, traditional HD maps are coupled with centimeter-level accurate localization which is unreliable in many scenarios. In this paper, we argue that online map learning, which dynamically constructs the HD maps based on local sensor observations, is a more scalable way to provide semantic and geometry priors to self-driving vehicles than traditional pre-annotated HD maps. Furthermore, we introduce a strong online map learning baseline, titled HDMapNet. HDMapNet consists of two major modules: an encoder that operates on image features from surrounding cameras and/or point clouds from LiDAR, and a birds-eye view network to predict map elements. We benchmark our method on the nuScenes dataset and show that in all settings, it performs better than baseline methods. Of note, our fusion-based HDMapNet outperforms existing methods by more than 50% in all metrics. To accelerate future research, we develop customized metrics to evaluate map learning performance, including both semantic-level and instance-level ones. By introducing this new baseline and metrics, we invite the community to study this novel map learning problem. We will release our code and evaluation kit to facilitate future development.
-<DIV>
+                    <table frame=void style="border:none">
+<tr>
+<td style="background-color:#FFFFFF; border:none"><img src="images/scene0_car.gif"></td>
+<td style="background-color:#FFFFFF; border:none"><img src="images/scene2_car.gif"></td>
+<td style="background-color:#FFFFFF; border:none"><img src="images/scene3_car.gif"></td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; border:none"><img src="images/scene5_car.gif"></td>
+<td style="background-color:#FFFFFF; border:none"><img src="images/scene13_car.gif"></td>
+<td style="background-color:#FFFFFF; border:none"><img src="images/scene14_car.gif"></td>
+</tr>
+</table>
                 </div>
                 
             </div>
@@ -216,17 +228,46 @@ High-definition map (HD map) construction is a crucial problem for autonomous dr
         
 
         
+        <div class="section" id="abstract">
+            <div class="container">
+                <h2 class="title is-2 has-text-centered">Main idea</h2>
+                
+                <div class="markdown has-text-centered">
+                    <img src="images/teaser_v3.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
+<figcaption style="text-align:left">
+<b>Main idea</b>. High-definition map (HD map) construction is a crucial problem for autonomous driving. This problem typically involves collecting high-quality point clouds, fusing multiple point clouds of the same scene, annotating map elements, and updating maps constantly. This pipeline, however, requires a vast amount of human efforts and resources which limits its scalability. In this paper, we argue that online map learning, which dynamically constructs the HD maps based on local sensor observations, is a more scalable way to provide semantic and geometry priors to self-driving vehicles than traditional pre-annotated HD maps. We introduce a strong online map learning method, titled HDMapNet.
+</figcaption>
+</figure>
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        
         <div class="section" id="main_idea">
             <div class="container">
-                <h2 class="title is-2 has-text-centered">Main Idea</h2>
+                <h2 class="title is-2 has-text-centered">Method</h2>
                 
                 <div class="markdown has-text-centered">
                     <figure>
-<img src="images/overview_v2.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
-<figcaption style="text-align:center">
+<img src="images/overview_v3.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
+<figcaption style="text-align:left">
 <b>The overview of HDMapNet</b>. Four neural network parameterize our model: a perspective view image encoder, a neural view transformer in image branch, a pillar-based point cloud encoder, and a map element decoder. The output of the map decoder has 3 branches: semantic segmentation, instance detection and direction classification, which are processed into vectorized HD map.
 </figcaption>
 </figure>
+
                 </div>
                 
             </div>
@@ -254,32 +295,35 @@ High-definition map (HD map) construction is a crucial problem for autonomous dr
 We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM with bird's eye view encoder (IPM(B)), IPM with cam view encoder and bird's eye view encoder (IPM(CB)), <a href="https://arxiv.org/pdf/2008.05711.pdf">Lift-Splat-Shoot</a> and <a href="https://arxiv.org/pdf/1906.03560.pdf">View Prasing Network</a>.
 <DIV>
 <br>
+<!-- 
+### Quantative results
 
-<h3 id="quantative-results" class="anchor-link"><a href="#quantative-results">Quantative results</a></h3>
 <figure>
 <img src="images/segmentation.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
-<figcaption style="text-align:center">
+<figcaption style="text-align:left">
 <b>IoU scores(%) and Chamfer Distance(m) of semantic map segmentation.</b> CD<sub>P</sub> denotes the CD from label to prediction (equivalent to precision), CP<sub>L</sub> denotes the CD from Prediction to Label (equivalent to recall); CD is the average of them. *: the perspective view labels projected from 2D HD Maps.
 </figcaption>
 </figure>
+
 <br>
 <figure>
 <img src="images/instance.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
-<figcaption style="text-align:center">
+<figcaption style="text-align:left">
 <b>Instance detection results.</b> {0.2, 0.5, 1} are the predefined thresholds of Chamfer distance (e.g., a prediction is considierer a true positive if the Chamfer distance between label and prediction is lower than that threshold.) The mAP is the average of three APs.
 </figcaption>
 </figure>
-<br>
+
+<br> 
+-->
 
 <h3 id="qualitative-results" class="anchor-link"><a href="#qualitative-results">Qualitative results</a></h3>
 <figure>
 <img src="images/qualitative.png" style="padding:0px; margin:0px">
-<figcaption style="text-align:center">
+<figcaption style="text-align:left">
 <b>The qualitative results on nuScenes dataset.</b> Top Left: we show the surrounding images and the ground-truth local HD Map annotations. IPM: we show the lane segmentation result in the perspective view and in the bird's-eye view. Others: we show the semantic segmentation results and the vectorized instance detection results. As we can see, Our HDMapNet(Surr) and HDMapNet(Fusion) outputs are close to the ground-truth HD Map and the fusion based HDMapNet is clearly the best.
 </figcaption>
 </figure>
 <br>
-
                 </div>
                 
             </div>
@@ -328,8 +372,21 @@ We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM wit
             <div class="container has-text-centered">
                 <h2 class="title is-2">Contact</h2>
                 <div class="markdown">
-                    <p>For more information, please contact: <a href="mailto:liqi17@mails.tsinghua.edu.cn"><a href="mailto:liqi17@mails.tsinghua.edu.cn">liqi17@mails.tsinghua.edu.cn</a></a></p>
-
+                    <p>If you find our work useful in your research, please consider citing:</p>
+<blockquote style="text-align:left; background-color:#EEEEEE">
+@misc{li2021hdmapnet, <br>
+      title={HDMapNet: An Online HD Map Construction and Evaluation Framework}, <br>
+      author={Qi Li and Yue Wang and Yilun Wang and Hang Zhao}, <br>
+      year={2021}, <br>
+      eprint={2107.06307}, <br>
+      archivePrefix={arXiv}, <br>
+      primaryClass={cs.CV} <br>
+}
+</blockquote>
+<br>
+<DIV style="text-align:center">
+For more information, please contact: <a href="mailto:liqi17@mails.tsinghua.edu.cn">liqi17@mails.tsinghua.edu.cn</a>
+<DIV>
                 </div>
                 
                 <p>Local time:  <span id="time"></span>.</p>
