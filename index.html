@@ -11,7 +11,7 @@
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="An Online HD Map Construction and Evaluation Framework">
 <title>
-HDMapNet
+HdMapNet
 </title>
 
 <link href="/HDMapNet/index.xml" rel="alternate" type="application/rss+xml" title="HDMapNet" />
@@ -133,6 +133,12 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
             
             
             
+            <a class="navbar-item" href="#temporal">Temporal</a>
+            
+            
+            
+            
+            
             
             
             <a class="navbar-item" href="#abstract">Main idea</a>
@@ -211,6 +217,45 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
 </table>
 <DIV align="left">
 <b>The vectorized HD Map predicted by our model on nuScenes dataset.</b> The red lines indicate lane boundary, the white ones indicate lane divider, and the yellow ones indicate ped crossing. We draw LiDAR point clouds over the map for visualization purpose.<DIV>
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        
+        <div class="section" id="temporal" style="padding: 0">
+            <div class="container">
+                <h2 class="title is-2 has-text-centered">Temporal</h2>
+                
+                <div class="markdown has-text-centered">
+                    <table frame=void style="border:none; padding:0; margin:0">
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_12.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_14.gif"></td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_89.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_118.gif"></td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_148.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_43.gif"></td>
+</tr>
+</table>
+<DIV align="left">
+<b>Short-term temporal fusion by pasting feature maps of previous frames into current's according to ego poses. The feature maps are fused by max pooling and then fed into decoder.<DIV>
                 </div>
                 
             </div>
