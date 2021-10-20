@@ -2,7 +2,7 @@
 <html lang="en-us">
 
     <head>
-	<meta name="generator" content="Hugo 0.83.1" />
+	<meta name="generator" content="Hugo 0.88.1" />
         <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <meta name="HandheldFriendly" content="True">
@@ -11,7 +11,7 @@
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="An Online HD Map Construction and Evaluation Framework">
 <title>
-HdMapNet
+Hdmap Net
 </title>
 
 <link href="/HDMapNet/index.xml" rel="alternate" type="application/rss+xml" title="HDMapNet" />
@@ -25,6 +25,10 @@ HdMapNet
 
 
 
+
+<meta property="og:image" content="https://tsinghua-mars-lab.github.io/HDMapNet/home/images/DSC_0001.png"/>
+
+<meta property="og:image" content="https://tsinghua-mars-lab.github.io/HDMapNet/home/images/DSC_0002.png"/>
 
 
 
@@ -86,7 +90,7 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
     </a>
     &nbsp;&nbsp;&nbsp;
     <a href="https://github.com/Tsinghua-MARS-Lab/HDMapNet-dev">
-        <i class="fab fab fa-github" style="font-size: 35px"></i>Code (coming soon)
+        <i class="fab fab fa-github" style="font-size: 35px"></i>Github link
     </a>
 </div>
 
@@ -133,7 +137,7 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
             
             
             
-            <a class="navbar-item" href="#temporal">Temporal</a>
+            <a class="navbar-item" href="#temporal">Temporal Map Construction</a>
             
             
             
@@ -167,7 +171,7 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
 
             
             
-            <a class="navbar-item" href="#reference">Reference</a>
+            <a class="navbar-item" href="#contact">Contact</a>
             
             
 
@@ -203,11 +207,11 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
                 <h2 class="title is-2 has-text-centered">Demo</h2>
                 
                 <div class="markdown has-text-centered">
-                    <table frame=void style="border:none; padding:0; margin:0">
-<tr style="button-margin:0">
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0"><img src="images/scene0_car_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0"><img src="images/scene2_car_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0"><img src="images/scene3_car_small.gif"></td>
+                    <table frame=void style="border:none; padding:0; margin:0; border-spacing:0; border-collapse: collapse">
+<tr style="padding:0; border-collapse: collapse">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0;"><img src="images/scene0_car_small.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0;"><img src="images/scene2_car_small.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0;"><img src="images/scene3_car_small.gif"></td>
 </tr>
 <tr>
 <td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/scene5_car_small.gif"></td>
@@ -237,25 +241,26 @@ Qi Li<sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><
         
         <div class="section" id="temporal" style="padding: 0">
             <div class="container">
-                <h2 class="title is-2 has-text-centered">Temporal</h2>
+                <h2 class="title is-2 has-text-centered">Temporal Map Construction</h2>
                 
                 <div class="markdown has-text-centered">
                     <table frame=void style="border:none; padding:0; margin:0">
 <tr style="button-margin:0">
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_12.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_14.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_12_small.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_14_small.gif"></td>
 </tr>
 <tr>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_89.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_118.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_89_small.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_118_small.gif"></td>
 </tr>
 <tr>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_148.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_43.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_148_small.gif"></td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_43_small.gif"></td>
 </tr>
 </table>
 <DIV align="left">
-<b>Short-term temporal fusion by pasting feature maps of previous frames into current's according to ego poses. The feature maps are fused by max pooling and then fed into decoder.<DIV>
+<b>Long-term temporal accumulation by pasting feature maps of previous frames into current's according to ego poses. The feature maps are fused by max pooling and then fed into decoder.<DIV>
+
                 </div>
                 
             </div>
@@ -421,9 +426,9 @@ We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM wit
         
         
         
-        <div class="section" id="reference" style="padding: 0;">
+        <div class="section" id="contact" style="padding: 0;">
             <div class="container has-text-centered">
-                <h2 class="title is-2">Reference</h2>
+                <h2 class="title is-2">Contact</h2>
                 <div class="markdown">
                     <p>If you find our work useful in your research, please consider citing:</p>
 <blockquote style="text-align:left; background-color:#EEEEEE">
@@ -437,9 +442,9 @@ We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM wit
 }
 </blockquote>
 <br>
-<!-- <DIV style="text-align:center">
+<DIV style="text-align:center">
 For more information, please contact: <a href="mailto:liqi17@mails.tsinghua.edu.cn">liqi17@mails.tsinghua.edu.cn</a>
-<DIV> -->
+<DIV>
                 </div>
                 
                 <p>Local time:  <span id="time"></span>.</p>
