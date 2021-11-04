@@ -1,12 +1,10 @@
 import torch
 
 
-def chamfer_distance(source_pc, target_pc, threshold=2, cum=False, bidirectional=True):
+def chamfer_distance(source_pc, target_pc, threshold, cum=False, bidirectional=True):
     dist = torch.cdist(source_pc.float(), target_pc.float())
     dist1, _ = torch.min(dist, 2)
-    dist1[dist1 > threshold] = threshold
     dist2, _ = torch.min(dist, 1)
-    dist2[dist2 > threshold] = threshold
     if cum:
         len1 = dist1.shape[-1]
         len2 = dist2.shape[-1]
@@ -16,12 +14,12 @@ def chamfer_distance(source_pc, target_pc, threshold=2, cum=False, bidirectional
     dist1 = dist1.mean(-1)
     dist2 = dist2.mean(-1)
     if bidirectional:
-        return (dist1 + dist2) / 2
+        return min((dist1 + dist2) / 2, threshold)
     else:
-        return dist1, dist2
+        return min(dist1, threshold), min(dist2, threshold)
 
 
-def semantic_mask_chamfer_dist_cum(seg_pred, seg_label, scale_x, scale_y, threshold=2):
+def semantic_mask_chamfer_dist_cum(seg_pred, seg_label, scale_x, scale_y, threshold):
     # seg_label: N, C, H, W
     # seg_pred: N, C, H, W
     N, C, H, W = seg_label.shape

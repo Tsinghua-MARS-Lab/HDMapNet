@@ -48,7 +48,11 @@ def line_geom_to_mask(layer_geom, confidence_levels, local_box, canvas_size, thi
             new_line = affinity.affine_transform(new_line, [1.0, 0.0, 0.0, 1.0, trans_x, trans_y])
             new_line = affinity.scale(new_line, xfact=scale_width, yfact=scale_height, origin=(0, 0))
             confidence_levels.append(confidence)
-            map_mask, idx = mask_for_lines(new_line, map_mask, idx, thickness)
+            if new_line.geom_type == 'MultiLineString':
+                for new_single_line in new_line:
+                    map_mask, idx = mask_for_lines(new_single_line, map_mask, idx, thickness)
+            else:
+                map_mask, idx = mask_for_lines(new_line, map_mask, idx, thickness)
     return map_mask, idx
 
 

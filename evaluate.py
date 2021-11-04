@@ -30,7 +30,7 @@ def get_val_info(args):
     for pred_map, confidence_level, gt_map in tqdm.tqdm(data_loader):
         # iou
         intersect, union = get_batch_iou(pred_map, gt_map)
-        CD1, CD2, num1, num2 = semantic_mask_chamfer_dist_cum(pred_map, gt_map, args.xbound[2], args.ybound[2])
+        CD1, CD2, num1, num2 = semantic_mask_chamfer_dist_cum(pred_map, gt_map, args.xbound[2], args.ybound[2], threshold=args.CD_threshold)
 
         instance_mask_AP(AP_matrix, AP_count_matrix, pred_map, gt_map, args.xbound[2], args.ybound[2],
                          confidence_level, THRESHOLDS, sampled_recalls=SAMPLED_RECALLS)
@@ -42,11 +42,17 @@ def get_val_info(args):
         total_CD_num1 += num1
         total_CD_num2 += num2
 
+    CD_pred = total_CD1 / total_CD_num1
+    CD_label = total_CD2 / total_CD_num2
+    CD = (total_CD1 + total_CD2) / (total_CD_num1 + total_CD_num2)
+    CD_pred[CD_pred > args.CD_threshold] = args.CD_threshold
+    CD_label[CD_label > args.CD_threshold] = args.CD_threshold
+    CD[CD > args.CD_threshold] = args.CD_threshold
     return {
         'iou': total_intersect / total_union,
-        'CD_pred (precision)': total_CD1 / total_CD_num1,
-        'CD_label (recall)': total_CD2 / total_CD_num2,
-        'chamfer_distance': (total_CD1 + total_CD2) / (total_CD_num1 + total_CD_num2),
+        'CD_pred': CD_pred,
+        'CD_label': CD_label,
+        'CD': CD,
         'Average_precision': AP_matrix / AP_count_matrix,
     }
 
@@ -61,6 +67,7 @@ if __name__ == '__main__':
     parser.add_argument('--eval_set', type=str, default='mini_val', choices=['train', 'val', 'test', 'mini_train', 'mini_val'])
     parser.add_argument('--thickness', type=int, default=1)
     parser.add_argument('--max_channel', type=int, default=3)
+    parser.add_argument('--CD_threshold', type=int, default=5)
     parser.add_argument("--xbound", nargs=3, type=float, default=[-30.0, 30.0, 0.15])
     parser.add_argument("--ybound", nargs=3, type=float, default=[-15.0, 15.0, 0.15])
 

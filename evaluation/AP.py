@@ -32,7 +32,7 @@ def line_matching_by_CD(inst_pred_lines, inst_pred_confidence, inst_label_lines,
     inst_label_lines_keys = [*inst_label_lines]
     for i, key_pred in enumerate(inst_pred_lines_keys):
         for j, key_label in enumerate(inst_label_lines_keys):
-            CD[i, j] = chamfer_distance(inst_pred_lines[key_pred][None], inst_label_lines[key_label][None], bidirectional=True)
+            CD[i, j] = chamfer_distance(inst_pred_lines[key_pred][None], inst_label_lines[key_label][None], bidirectional=True, threshold=threshold)
 
     pred_taken = torch.zeros(pred_num, dtype=torch.bool)
     label_taken = torch.zeros(label_num, dtype=torch.bool)
