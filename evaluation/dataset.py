@@ -39,18 +39,3 @@ class HDMapNetEvalDataset(HDMapNetDataset):
         confidence_level = torch.tensor(confidence_level + [-1] * (self.max_line_count - len(confidence_level)))
 
         return pred_map, confidence_level, gt_map
-
-
-if __name__ == '__main__':
-    import argparse
-    parser = argparse.ArgumentParser(description='Evaluate nuScenes local HD Map Construction Results.')
-    parser.add_argument('--result_path', type=str)
-    parser.add_argument('--dataroot', type=str)
-    parser.add_argument('--version', type=str, default='v1.0-mini', choices=['v1.0-trainval', 'v1.0-mini'])
-    parser.add_argument('--eval_set', type=str, default='mini_val', choices=['train', 'val', 'test', 'mini_train', 'mini_val'])
-
-    args = parser.parse_args()
-
-    dataset = HDMapNetEvalDataset(args.version, args.dataroot, args.eval_set, args.result_path, thickness=2)
-    for i in range(dataset.__len__()):
-        pred_vectors, confidence_level, gt_vectors = dataset.__getitem__(i)

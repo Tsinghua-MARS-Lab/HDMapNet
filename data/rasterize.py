@@ -50,9 +50,9 @@ def line_geom_to_mask(layer_geom, confidence_levels, local_box, canvas_size, thi
             confidence_levels.append(confidence)
             if new_line.geom_type == 'MultiLineString':
                 for new_single_line in new_line:
-                    map_mask, idx = mask_for_lines(new_single_line, map_mask, idx, thickness)
+                    map_mask, idx = mask_for_lines(new_single_line, map_mask, thickness, idx)
             else:
-                map_mask, idx = mask_for_lines(new_line, map_mask, idx, thickness)
+                map_mask, idx = mask_for_lines(new_line, map_mask, thickness, idx)
     return map_mask, idx
 
 

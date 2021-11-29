@@ -40,7 +40,7 @@ def line_matching_by_CD(inst_pred_lines, inst_pred_confidence, inst_label_lines,
     if pred_num > 0 and label_num > 0:
         while True:
             idx = torch.argmin(CD)
-            i, j = (torch.div(idx, CD.shape[1], rounding_mode='floor')).item(), (idx % CD.shape[1]).item()
+            i, j = (idx // CD.shape[1]).item(), (idx % CD.shape[1]).item()
             if CD[i, j] >= threshold:
                 break
             matched_list.append({
