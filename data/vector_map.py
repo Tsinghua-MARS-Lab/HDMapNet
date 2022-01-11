@@ -62,7 +62,8 @@ class VectorizedLocalMap(object):
         line_vector_dict = self.line_geoms_to_vectors(line_geom)
 
         ped_geom = self.get_map_geom(patch_box, patch_angle, self.ped_crossing_classes, location)
-        ped_vector_list = self.ped_geoms_to_vectors(ped_geom)
+        # ped_vector_list = self.ped_geoms_to_vectors(ped_geom)
+        ped_vector_list = self.line_geoms_to_vectors(ped_geom)['ped_crossing']
 
         polygon_geom = self.get_map_geom(patch_box, patch_angle, self.polygon_classes, location)
         poly_bound_list = self.poly_geoms_to_vectors(polygon_geom)
@@ -100,7 +101,8 @@ class VectorizedLocalMap(object):
                 geoms = self.map_explorer[location]._get_layer_polygon(patch_box, patch_angle, layer_name)
                 map_geom.append((layer_name, geoms))
             elif layer_name in self.ped_crossing_classes:
-                geoms = self.map_explorer[location]._get_layer_polygon(patch_box, patch_angle, layer_name)
+                geoms = self.get_ped_crossing_line(patch_box, patch_angle, location)
+                # geoms = self.map_explorer[location]._get_layer_polygon(patch_box, patch_angle, layer_name)
                 map_geom.append((layer_name, geoms))
         return map_geom
 
@@ -182,7 +184,7 @@ class VectorizedLocalMap(object):
         def add_line(poly_xy, idx, patch, patch_angle, patch_x, patch_y, line_list):
             points = [(p0, p1) for p0, p1 in zip(poly_xy[0, idx:idx + 2], poly_xy[1, idx:idx + 2])]
             line = LineString(points)
-            line.intersection(patch)
+            line = line.intersection(patch)
             if not line.is_empty:
                 line = affinity.rotate(line, -patch_angle, origin=(patch_x, patch_y), use_radians=False)
                 line = affinity.affine_transform(line, [1.0, 0.0, 0.0, 1.0, -patch_x, -patch_y])
