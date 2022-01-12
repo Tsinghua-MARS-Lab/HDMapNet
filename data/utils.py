@@ -1,5 +1,7 @@
 import numpy as np
 
+import torch
+
 
 def get_proj_mat(intrins, rots, trans):
     K = np.eye(4)
@@ -19,3 +21,14 @@ def perspective(cam_coords, proj_mat):
     pix_coords = pix_coords[:2, :] / (pix_coords[2, :] + 1e-7)
     pix_coords = pix_coords.transpose(1, 0)
     return pix_coords
+
+
+def label_onehot_decoding(onehot):
+    return torch.argmax(onehot, axis=0)
+
+
+def label_onehot_encoding(label, num_classes=4):
+    H, W = label.shape
+    onehot = torch.zeros((num_classes, H, W))
+    onehot.scatter_(0, label[None].long(), 1)
+    return onehot

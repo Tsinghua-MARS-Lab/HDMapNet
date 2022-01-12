@@ -2,7 +2,7 @@ import numpy as np
 from nuscenes.map_expansion.map_api import NuScenesMap, NuScenesMapExplorer
 from nuscenes.eval.common.utils import quaternion_yaw, Quaternion
 from shapely import affinity, ops
-from shapely.geometry import LineString, box, MultiPolygon
+from shapely.geometry import LineString, box, MultiPolygon, MultiLineString
 
 
 class VectorizedLocalMap(object):
@@ -19,9 +19,9 @@ class VectorizedLocalMap(object):
                  normalize=False,
                  fixed_num=-1,
                  class2label={
-                     'ped_crossing': 0,
-                     'road_divider': 1,
-                     'lane_divider': 1,
+                     'road_divider': 0,
+                     'lane_divider': 0,
+                     'ped_crossing': 1,
                      'contours': 2,
                      'others': -1,
                  }):
@@ -142,12 +142,16 @@ class VectorizedLocalMap(object):
             if ext.is_ccw:
                 ext.coords = list(ext.coords)[::-1]
             lines = ext.intersection(local_patch)
+            if isinstance(lines, MultiLineString):
+                lines = ops.linemerge(lines)
             results.append(lines)
 
         for inter in interiors:
             if not inter.is_ccw:
                 inter.coords = list(inter.coords)[::-1]
             lines = inter.intersection(local_patch)
+            if isinstance(lines, MultiLineString):
+                lines = ops.linemerge(lines)
             results.append(lines)
 
         return self._one_type_line_geom_to_vectors(results)
