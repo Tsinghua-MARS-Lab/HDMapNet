@@ -7,14 +7,21 @@ from PIL import Image
 
 from data.dataset import HDMapNetDataset, CAMS
 from data.utils import get_proj_mat, perspective
+from data.image import denormalize_img
 
 
 def vis_label(dataroot, version, xbound, ybound):
+    data_conf = {
+        'image_size': (900, 1600),
+        'xbound': xbound,
+        'ybound': ybound
+    }
+
     color_map = np.random.randint(0, 256, (256, 3))
     color_map[0] = np.array([0, 0, 0])
     colors_plt = ['r', 'b', 'g']
 
-    dataset = HDMapNetDataset(version=version, dataroot=dataroot, xbound=xbound, ybound=ybound)
+    dataset = HDMapNetDataset(version=version, dataroot=dataroot, data_conf=data_conf, is_train=False)
     gt_path = os.path.join(dataroot, 'samples', 'GT')
     if not os.path.exists(gt_path):
         os.mkdir(gt_path)
@@ -22,7 +29,8 @@ def vis_label(dataroot, version, xbound, ybound):
     car_img = Image.open('icon/car.png')
     for idx in tqdm.tqdm(range(dataset.__len__())):
         rec = dataset.nusc.sample[idx]
-        imgs, trans, rots, intrins, vectors = dataset.__getitem__(idx)
+        imgs, trans, rots, intrins, post_trans, post_rots = dataset.get_imgs(rec)
+        vectors = dataset.get_vectors(rec)
 
         lidar_top_path = dataset.nusc.get_sample_data_path(rec['data']['LIDAR_TOP'])
 
@@ -50,6 +58,7 @@ def vis_label(dataroot, version, xbound, ybound):
         plt.close()
 
         for img, intrin, rot, tran, cam in zip(imgs, intrins, rots, trans, CAMS):
+            img = denormalize_img(img)
             P = get_proj_mat(intrin, rot, tran)
             plt.figure(figsize=(9, 16))
             fig = plt.imshow(img)

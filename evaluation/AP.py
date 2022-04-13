@@ -26,7 +26,7 @@ def line_matching_by_CD(inst_pred_lines, inst_pred_confidence, inst_label_lines,
     # return: a list of {'pred': (M, 2), 'label': (N, 2), 'confidence': scalar}
     pred_num = len(inst_pred_lines)
     label_num = len(inst_label_lines)
-    CD = torch.zeros((pred_num, label_num))
+    CD = torch.zeros((pred_num, label_num)).cuda()
 
     inst_pred_lines_keys = [*inst_pred_lines]
     inst_label_lines_keys = [*inst_label_lines]
@@ -34,8 +34,8 @@ def line_matching_by_CD(inst_pred_lines, inst_pred_confidence, inst_label_lines,
         for j, key_label in enumerate(inst_label_lines_keys):
             CD[i, j] = chamfer_distance(inst_pred_lines[key_pred][None], inst_label_lines[key_label][None], bidirectional=True, threshold=threshold)
 
-    pred_taken = torch.zeros(pred_num, dtype=torch.bool)
-    label_taken = torch.zeros(label_num, dtype=torch.bool)
+    pred_taken = torch.zeros(pred_num, dtype=torch.bool).cuda()
+    label_taken = torch.zeros(label_num, dtype=torch.bool).cuda()
     matched_list = []
     if pred_num > 0 and label_num > 0:
         while True:
@@ -96,7 +96,7 @@ def single_instance_line_AP(inst_pred_lines, inst_pred_confidence, inst_label_li
     # inst_label_line: a list of points {1: (N1, 2), 2: (N2, 2), ..., k1: (N_k1, 2)}
     # thresholds: threshold of chamfer distance to identify TP
     num_thres = len(thresholds)
-    AP_thres = torch.zeros(num_thres)
+    AP_thres = torch.zeros(num_thres).cuda()
     for t in range(num_thres):
         matching_list = line_matching_by_CD(inst_pred_lines, inst_pred_confidence, inst_label_lines, thresholds[t])
         precision, recall = get_precision_recall_curve_by_confidence(matching_list, len(inst_label_lines), thresholds[t])

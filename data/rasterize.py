@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+import torch
+
 from shapely import affinity
 from shapely.geometry import LineString, box
 
@@ -84,10 +86,10 @@ def overlap_filter(mask, filter_mask):
     return mask
 
 
-def preprocess_map(vectors, patch_size, canvas_size, max_channel, thickness, angle_class):
+def preprocess_map(vectors, patch_size, canvas_size, num_classes, thickness, angle_class):
     confidence_levels = [-1]
     vector_num_list = {}
-    for i in range(max_channel):
+    for i in range(num_classes):
         vector_num_list[i] = []
 
     for vector in vectors:
@@ -101,7 +103,7 @@ def preprocess_map(vectors, patch_size, canvas_size, max_channel, thickness, ang
     instance_masks = []
     forward_masks = []
     backward_masks = []
-    for i in range(max_channel):
+    for i in range(num_classes):
         map_mask, idx = line_geom_to_mask(vector_num_list[i], confidence_levels, local_box, canvas_size, thickness, idx)
         instance_masks.append(map_mask)
         filter_mask, _ = line_geom_to_mask(vector_num_list[i], confidence_levels, local_box, canvas_size, thickness + 4, 1)
@@ -120,15 +122,13 @@ def preprocess_map(vectors, patch_size, canvas_size, max_channel, thickness, ang
     forward_masks = overlap_filter(forward_masks, filter_masks).sum(0).astype('int32')
     backward_masks = overlap_filter(backward_masks, filter_masks).sum(0).astype('int32')
 
-    semantic_masks = instance_masks != 0
-
-    return semantic_masks, instance_masks, forward_masks, backward_masks
+    return torch.tensor(instance_masks), torch.tensor(forward_masks), torch.tensor(backward_masks)
 
 
-def rasterize_map(vectors, patch_size, canvas_size, max_channel, thickness):
+def rasterize_map(vectors, patch_size, canvas_size, num_classes, thickness):
     confidence_levels = [-1]
     vector_num_list = {}
-    for i in range(max_channel + 1):
+    for i in range(num_classes):
         vector_num_list[i] = []
 
     for vector in vectors:
@@ -139,7 +139,7 @@ def rasterize_map(vectors, patch_size, canvas_size, max_channel, thickness):
 
     idx = 1
     masks = []
-    for i in range(max_channel):
+    for i in range(num_classes):
         map_mask, idx = line_geom_to_mask(vector_num_list[i], confidence_levels, local_box, canvas_size, thickness, idx)
         masks.append(map_mask)
 

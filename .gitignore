@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb
+
+# C extensions
+*.so
+
+# cython generated cpp
+.vscode
+.idea
+
+# custom
+*.pkl
+*.gif
+*.pkl.json
+*.log.json
+*~
+
+# Pytorch
+*.pth
+
+# demo
+*.jpg
+*.png
+*.obj
+*.ply
+*.zip
+

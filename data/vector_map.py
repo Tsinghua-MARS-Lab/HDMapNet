@@ -4,6 +4,7 @@ from nuscenes.eval.common.utils import quaternion_yaw, Quaternion
 from shapely import affinity, ops
 from shapely.geometry import LineString, box, MultiPolygon, MultiLineString
 
+from .const import CLASS2LABEL
 
 class VectorizedLocalMap(object):
     def __init__(self,
@@ -17,14 +18,7 @@ class VectorizedLocalMap(object):
                  num_samples=250,
                  padding=False,
                  normalize=False,
-                 fixed_num=-1,
-                 class2label={
-                     'road_divider': 0,
-                     'lane_divider': 0,
-                     'ped_crossing': 1,
-                     'contours': 2,
-                     'others': -1,
-                 }):
+                 fixed_num=-1):
         '''
         Args:
             fixed_num = -1 : no fixed num
@@ -36,7 +30,6 @@ class VectorizedLocalMap(object):
         self.line_classes = line_classes
         self.ped_crossing_classes = ped_crossing_classes
         self.polygon_classes = contour_classes
-        self.class2label = class2label
         self.nusc_maps = {}
         self.map_explorer = {}
         for loc in self.MAPS:
@@ -71,13 +64,13 @@ class VectorizedLocalMap(object):
         vectors = []
         for line_type, vects in line_vector_dict.items():
             for line, length in vects:
-                vectors.append((line.astype(float), length, self.class2label.get(line_type, -1)))
+                vectors.append((line.astype(float), length, CLASS2LABEL.get(line_type, -1)))
 
         for ped_line, length in ped_vector_list:
-            vectors.append((ped_line.astype(float), length, self.class2label.get('ped_crossing', -1)))
+            vectors.append((ped_line.astype(float), length, CLASS2LABEL.get('ped_crossing', -1)))
 
         for contour, length in poly_bound_list:
-            vectors.append((contour.astype(float), length, self.class2label.get('contours', -1)))
+            vectors.append((contour.astype(float), length, CLASS2LABEL.get('contours', -1)))
 
         # filter out -1
         filtered_vectors = []
@@ -111,8 +104,8 @@ class VectorizedLocalMap(object):
         for line in line_geom:
             if not line.is_empty:
                 if line.geom_type == 'MultiLineString':
-                    for l in line:
-                        line_vectors.append(self.sample_pts_from_line(l))
+                    for single_line in line.geoms:
+                        line_vectors.append(self.sample_pts_from_line(single_line))
                 elif line.geom_type == 'LineString':
                     line_vectors.append(self.sample_pts_from_line(line))
                 else:
@@ -132,7 +125,7 @@ class VectorizedLocalMap(object):
         interiors = []
         if union_segments.geom_type != 'MultiPolygon':
             union_segments = MultiPolygon([union_segments])
-        for poly in union_segments:
+        for poly in union_segments.geoms:
             exteriors.append(poly.exterior)
             for inter in poly.interiors:
                 interiors.append(inter)

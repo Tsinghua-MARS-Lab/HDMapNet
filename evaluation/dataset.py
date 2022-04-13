@@ -5,19 +5,21 @@ import torch
 
 from data.dataset import HDMapNetDataset
 from data.rasterize import rasterize_map
+from data.const import NUM_CLASSES
 from nuscenes.utils.splits import create_splits_scenes
 
 
 class HDMapNetEvalDataset(HDMapNetDataset):
-    def __init__(self, version, dataroot, eval_set, result_path, thickness, max_line_count=100, max_channel=3, xbound=[-30., 30., 0.15], ybound=[-15., 15., 0.15]):
-        super(HDMapNetEvalDataset, self).__init__(version, dataroot, xbound, ybound)
-        scenes = create_splits_scenes()[eval_set]
+    def __init__(self, version, dataroot, eval_set, result_path, data_conf, max_line_count=300):
+        self.eval_set = eval_set
+        super(HDMapNetEvalDataset, self).__init__(version, dataroot, data_conf, is_train=False)
         with open(result_path, 'r') as f:
             self.prediction = json.load(f)
-        self.samples = [samp for samp in self.nusc.sample if self.nusc.get('scene', samp['scene_token'])['name'] in scenes]
         self.max_line_count = max_line_count
-        self.max_channel = max_channel
-        self.thickness = thickness
+        self.thickness = data_conf['thickness']
+
+    def get_scenes(self, version, is_train):
+        return create_splits_scenes()[self.eval_set]
 
     def __len__(self):
         return len(self.samples)
@@ -28,10 +30,10 @@ class HDMapNetEvalDataset(HDMapNetDataset):
         ego_pose = self.nusc.get('ego_pose', self.nusc.get('sample_data', rec['data']['LIDAR_TOP'])['ego_pose_token'])
         gt_vectors = self.vector_map.gen_vectorized_samples(location, ego_pose['translation'], ego_pose['rotation'])
 
-        gt_map, _ = rasterize_map(gt_vectors, self.patch_size, self.canvas_size, self.max_channel, self.thickness)
+        gt_map, _ = rasterize_map(gt_vectors, self.patch_size, self.canvas_size, NUM_CLASSES, self.thickness)
         if self.prediction['meta']['vector']:
             pred_vectors = self.prediction['results'][rec['token']]
-            pred_map, confidence_level = rasterize_map(pred_vectors, self.patch_size, self.canvas_size, self.max_channel, self.thickness)
+            pred_map, confidence_level = rasterize_map(pred_vectors, self.patch_size, self.canvas_size, NUM_CLASSES, self.thickness)
         else:
             pred_map = np.array(self.prediction['results'][rec['token']]['map'])
             confidence_level = self.prediction['results'][rec['token']]['confidence_level']

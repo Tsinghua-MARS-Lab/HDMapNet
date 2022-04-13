@@ -1,12 +1,16 @@
 import argparse
-import tqdm
+import numpy as np
+from PIL import Image
 
+import matplotlib.pyplot as plt
+
+import tqdm
 import torch
 
 from data.dataset import semantic_dataset
 from data.const import NUM_CLASSES
-from evaluation.iou import get_batch_iou
 from model import get_model
+from postprocess.vectorize import vectorize
 
 
 def onehot_encoding(logits, dim=1):
@@ -16,22 +20,60 @@ def onehot_encoding(logits, dim=1):
     return one_hot
 
 
-def eval_iou(model, val_loader):
+def vis_segmentation(model, val_loader):
     model.eval()
-    total_intersects = 0
-    total_union = 0
     with torch.no_grad():
-        for imgs, trans, rots, intrins, post_trans, post_rots, lidar_data, lidar_mask, car_trans, yaw_pitch_roll, semantic_gt, instance_gt, direction_gt in tqdm.tqdm(val_loader):
+        for batchi, (imgs, trans, rots, intrins, post_trans, post_rots, lidar_data, lidar_mask, car_trans, yaw_pitch_roll, semantic_gt, instance_gt, direction_gt) in enumerate(val_loader):
 
             semantic, embedding, direction = model(imgs.cuda(), trans.cuda(), rots.cuda(), intrins.cuda(),
                                                 post_trans.cuda(), post_rots.cuda(), lidar_data.cuda(),
                                                 lidar_mask.cuda(), car_trans.cuda(), yaw_pitch_roll.cuda())
+            semantic = semantic.softmax(1).cpu().numpy()
+            semantic[semantic_gt < 0.1] = np.nan
 
-            semantic_gt = semantic_gt.cuda().float()
-            intersects, union = get_batch_iou(onehot_encoding(semantic), semantic_gt)
-            total_intersects += intersects
-            total_union += union
-    return total_intersects / (total_union + 1e-7)
+            for si in range(semantic.shape[0]):
+                plt.figure(figsize=(4, 2))
+                plt.imshow(semantic[si][1], vmin=0, cmap='Blues', vmax=1, alpha=0.6)
+                plt.imshow(semantic[si][2], vmin=0, cmap='Reds', vmax=1, alpha=0.6)
+                plt.imshow(semantic[si][3], vmin=0, cmap='Greens', vmax=1, alpha=0.6)
+
+                # fig.axes.get_xaxis().set_visible(False)
+                # fig.axes.get_yaxis().set_visible(False)
+                plt.xlim(0, 400)
+                plt.ylim(0, 200)
+                plt.axis('off')
+
+                imname = f'eval{batchi:06}_{si:03}.jpg'
+                print('saving', imname)
+                plt.savefig(imname)
+                plt.close()
+
+
+def vis_vector(model, val_loader, angle_class):
+    model.eval()
+    car_img = Image.open('icon/car.png')
+
+    with torch.no_grad():
+        for batchi, (imgs, trans, rots, intrins, post_trans, post_rots, lidar_data, lidar_mask, car_trans, yaw_pitch_roll, segmentation_gt, instance_gt, direction_gt) in enumerate(val_loader):
+
+            segmentation, embedding, direction = model(imgs.cuda(), trans.cuda(), rots.cuda(), intrins.cuda(),
+                                                       post_trans.cuda(), post_rots.cuda(), lidar_data.cuda(),
+                                                       lidar_mask.cuda(), car_trans.cuda(), yaw_pitch_roll.cuda())
+
+            for si in range(segmentation.shape[0]):
+                coords, _, _ = vectorize(segmentation[si], embedding[si], direction[si], angle_class)
+
+                for coord in coords:
+                    plt.plot(coord[:, 0], coord[:, 1], linewidth=5)
+
+                plt.xlim((0, segmentation.shape[3]))
+                plt.ylim((0, segmentation.shape[2]))
+                plt.imshow(car_img, extent=[segmentation.shape[3]//2-15, segmentation.shape[3]//2+15, segmentation.shape[2]//2-12, segmentation.shape[2]//2+12])
+
+                img_name = f'eval{batchi:06}_{si:03}.jpg'
+                print('saving', img_name)
+                plt.savefig(img_name)
+                plt.close()
 
 
 def main(args):
@@ -50,7 +92,8 @@ def main(args):
     model = get_model(args.model, data_conf, args.instance_seg, args.embedding_dim, args.direction_pred, args.angle_class)
     model.load_state_dict(torch.load(args.modelf), strict=False)
     model.cuda()
-    print(eval_iou(model, val_loader))
+    vis_vector(model, val_loader, args.angle_class)
+    # vis_segmentation(model, val_loader)
 
 
 if __name__ == '__main__':
