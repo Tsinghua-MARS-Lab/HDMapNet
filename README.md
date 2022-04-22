@@ -1,6 +1,8 @@
-# HDMapNet, ICRA 2022, CVPR 2021 Workshop best paper nominee
+# HDMapNet
 
 **HDMapNet: An Online HD Map Construction and Evaluation Framework**
+
+**ICRA 2022, CVPR 2021 Workshop best paper nominee**
 
 [Qi Li](https://liqi17thu.github.io/), [Yue Wang](https://people.csail.mit.edu/yuewang/), [Yilun Wang](https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/), [Hang Zhao](http://people.csail.mit.edu/hangzhao/)
 
@@ -83,7 +85,7 @@ Run `python export_gt_to_json.py` to get a demo of vectorized submission. Run `p
 Run `python export_pred_to_json.py --modelf [checkpoint]` to get submission file for trained model.
 
 ### Citation
-If you found this useful in your research, please consider citing
+If you found this paper or codebase useful, please cite our paper:
 ```
 @misc{li2021hdmapnet,
       title={HDMapNet: An Online HD Map Construction and Evaluation Framework}, 
