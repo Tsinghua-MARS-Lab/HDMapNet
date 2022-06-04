@@ -8,12 +8,9 @@
     <title>HDMapNet</title>
 
     <link href="./assets/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <link href="./assets/font.css" rel="stylesheet" type="text/css">
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="./assets/font.css" rel="stylesheet" type="text/css"> -->
     <link href="./assets/style.css" rel="stylesheet" type="text/css">
-
-    <!-- <link rel="icon" href="amalia/samples/images/favicon.ico"> -->
-    <!-- <link rel="shortcut icon" href="/HDMapNet/img/fav.ico"> -->
 
     <script src="./assets/jquery.min.js"></script>
     <script type="text/javascript" src="assets/corpus.js"></script>
@@ -44,7 +41,7 @@
     </div>
     <!-- === Title Ends === -->
 
-    <div class="author" style="margin-top: -30pt">
+    <div class="author" style="margin-top: -10pt">
         <a href="https://liqi17thu.github.io/">Qi Li</a><sup>1</sup>,&nbsp;
         <a href="https://people.csail.mit.edu/yuewang/" target="_blank">Yue Wang</a><sup>2</sup>,&nbsp;
         <a href="https://scholar.google.com.hk/citations?hl=en&user=nUyTDosAAAAJ">Yilun Wang</a><sup>3</sup>,&nbsp;
@@ -73,8 +70,7 @@
 
     </div>
 
-
-
+<!-- 
     <table border="0" align="center">
         <tr>
             <td align="center" style="padding: 0pt 0 15pt 0">
@@ -85,10 +81,7 @@
         </tr>
     </table>
     
-<!--     <p>
-        An end-to-end multi-camera 3D tracking framework that works with arbrtary camera rigs with known parameters. MUTR3D handles multi-camera 3D detection, and cross-camera, cross-frame objects association in an end-to-end fashion.
-    </p> -->
-    
+ -->    
 </div>
 <!-- === Home Section Ends === -->
 
@@ -112,7 +105,7 @@
         </table>
     </div>
     <p>
-        The vectorized HD Map predicted by our model. The red lines indicate lane boundary, the white ones indicate lane divider, and the yellow ones indicate ped crossing. We draw LiDAR point clouds over the map for visualization purpose.
+        The vectorized HD Map predicted by HDMapNet. The red lines indicate lane boundary, the white ones indicate lane divider, and the yellow ones indicate ped crossing. We draw LiDAR point clouds over the map for visualization purpose.
     </p>
 
 </div>
@@ -161,6 +154,34 @@
 
 
 <div class="section">
+    <div class="title" id="lang">More Results</div>
+    <div class="logo" style="" align="center">
+        <video controls preload="auto" width="100%"  autoplay loop playsinline class="html-video">
+            <source src="home/direction_3_car_short_small.mp4" type="video/mp4">
+            <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="/HDMapNet/home/direction_3_car_short_small.mp4">download it</a> and watch it with your favorite video player!</p>
+        </video>
+    </div>
+    <p>
+        The left part is the corresonding 6 images, the right one is the HD map prediction. We align the LiDAR point clouds on it for visualization purpose.
+    </p>
+
+    <br>
+    <div class="logo" style="" align="center">
+        <img style="max-width: 100%;" src="images/qualitative.png">
+    </div>
+    <p>
+        <b>The qualitative results on nuScenes dataset.</b> Top Left: we show the surrounding images and the ground-truth local HD Map annotations. IPM: we show the lane segmentation result in the perspective view and in the bird's-eye view. Others: we show the semantic segmentation results and the vectorized instance detection results. As we can see, Our HDMapNet(Surr) and HDMapNet(Fusion) outputs are close to the ground-truth HD Map and the fusion based HDMapNet is clearly the best.
+    </p> 
+</div>
+
+<div class="section">
+    <div class="title" id="lang">Talk</div>
+    <div class="logo" style="" align="center">
+       <iframe src="https://www.youtube.com/embed/AJ-rToTN8y8" style="max-width: 90%;" allowfullscreen title="YouTube Video"></iframe>
+    </div>
+</div>
+
+<div class="section">
     <div class="title" id="lang">Related Projects on VCAD (Vision-Centric Autonomous Driving)</div>
     <div class="col text-center">
 
@@ -185,7 +206,6 @@
     </tr>
     </table>
     </div>
-
 </div>
 
 <!-- === Reference Section Starts === -->
