@@ -105,7 +105,7 @@
         </table>
     </div>
     <p>
-        The vectorized HD Map predicted by HDMapNet. The red lines indicate lane boundary, the white ones indicate lane divider, and the yellow ones indicate ped crossing. We draw LiDAR point clouds over the map for visualization purpose.
+        The vectorized HD Map predicted by HDMapNet. Red line: lane boundary; White line: lane divider; Yellow line: pedestrian crossing. We overlay LiDAR point clouds over the map only for visualization purpose.
     </p>
 
 </div>
@@ -148,7 +148,7 @@
         <img style="max-width: 100%;" src="images/overview_v3.png">
     </div>
     <p>
-        <b>The overview of HDMapNet</b>. Four neural network parameterize our model: a perspective view image encoder, a neural view transformer in image branch, a pillar-based point cloud encoder, and a map element decoder. The output of the map decoder has 3 branches: semantic segmentation, instance detection and direction classification, which are processed into vectorized HD map. 
+        <b>The overview of HDMapNet</b>. Four modules parameterize HDMapNet: a perspective view image encoder, a neural view transformer in image branch, a pillar-based point cloud encoder, and a map element decoder. The output of the map decoder has 3 branches: semantic segmentation, instance detection and direction classification, which are processed into vectorized HD map. 
     </p>    
 </div>
 
@@ -162,7 +162,7 @@
         </video>
     </div>
     <p>
-        The left part is the corresonding 6 images, the right one is the HD map prediction. We align the LiDAR point clouds on it for visualization purpose.
+        On the left are 6 surround images, on the right is the predicted HD map. We overlay the LiDAR point clouds on it for visualization purpose.
     </p>
 
     <br>
@@ -170,7 +170,7 @@
         <img style="max-width: 100%;" src="images/qualitative.png">
     </div>
     <p>
-        <b>The qualitative results on nuScenes dataset.</b> Top Left: we show the surrounding images and the ground-truth local HD Map annotations. IPM: we show the lane segmentation result in the perspective view and in the bird's-eye view. Others: we show the semantic segmentation results and the vectorized instance detection results. As we can see, Our HDMapNet(Surr) and HDMapNet(Fusion) outputs are close to the ground-truth HD Map and the fusion based HDMapNet is clearly the best.
+        <b>Comparison.</b> Top Left: surround-vew images and the ground-truth HD map. IPM: lane segmentation results in the perspective view and in the bird's-eye view. Others: semantic segmentation results and vectorized instance detection results. As we can see, HDMapNet(Surr) and HDMapNet(Fusion) are achieving outstanding performance.
     </p> 
 </div>
 
