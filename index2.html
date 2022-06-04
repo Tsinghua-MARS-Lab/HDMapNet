@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<!-- === Header Starts === -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>HDMapNet</title>
+
+    <link href="./assets/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link href="./assets/font.css" rel="stylesheet" type="text/css">
+    <link href="./assets/style.css" rel="stylesheet" type="text/css">
+
+    <!-- <link rel="icon" href="amalia/samples/images/favicon.ico"> -->
+    <!-- <link rel="shortcut icon" href="/HDMapNet/img/fav.ico"> -->
+
+    <script src="./assets/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/corpus.js"></script>
+
+</head>
+<!-- === Header Ends === -->
+
+<script>
+    var lang_flag = 1;
+</script>
+
+<body>
+
+<!-- === Home Section Starts === -->
+<div class="section">
+    <!-- === Title Starts === -->
+
+    <!-- <div class="logo" style="padding-left: 120pt" align="top">
+        <a href="https://github.com/metadriverse/metadrive" target="_blank">
+            <img style=" width: 450pt;" src="images/metadrive.png">
+        </a>
+    </div> -->
+
+    <div class="header">
+        <div style="" class="title" id="lang">
+            <b>HDMapNet</b>: An Online HD Map Construction and Evaluation Framework
+        </div>
+    </div>
+    <!-- === Title Ends === -->
+
+    <div class="author" style="margin-top: -30pt">
+        <a href="https://liqi17thu.github.io/">Qi Li</a><sup>1</sup>,&nbsp;
+        <a href="https://people.csail.mit.edu/yuewang/" target="_blank">Yue Wang</a><sup>3</sup>,&nbsp;
+        <a href="https://scholar.google.com.hk/citations?hl=en&user=nUyTDosAAAAJ">Yilun Wang</a><sup>4</sup>,&nbsp;
+        <a href="https://hangzhaomit.github.io/">Hang Zhao</a><sup>5</sup>&nbsp;
+    </div>
+
+    <div class="institution">
+        <div><sup>1</sup>Tsinghua University,
+            <sup>2</sup>MIT,
+            <sup>3</sup>Li Auto,
+        </div>
+
+        <div class="social-icons">
+            <a href="https://arxiv.org/abs/2107.06307/">
+                <i class="fas fab fa-sticky-note"></i>ICRA 2022 (long version)
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="https://drive.google.com/file/d/1CEX232SJIUDTPPIviSM_K47QkhV9_5ua/view">
+                <i class="fas fab fa-sticky-note"></i>CVPR 2021 Workshop (best paper nominee)
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="https://github.com/Tsinghua-MARS-Lab/HDMapNet">
+                <i class="fab fab fa-github"></i>Code
+            </a>
+        </div>
+
+    </div>
+
+
+
+    <table border="0" align="center">
+        <tr>
+            <td align="center" style="padding: 0pt 0 15pt 0">
+                <a class="bar" href="https://tsinghua-mars-lab.github.io/MUTR3D/"><b>Webpage</b></a> |
+                <a class="bar" href="#"><b>Code</b></a> |
+                <a class="bar" href="https://arxiv.org/abs/2205.00613"><b>Paper</b></a>
+            </td>
+        </tr>
+    </table>
+    
+<!--     <p>
+        An end-to-end multi-camera 3D tracking framework that works with arbrtary camera rigs with known parameters. MUTR3D handles multi-camera 3D detection, and cross-camera, cross-frame objects association in an end-to-end fashion.
+    </p> -->
+    
+</div>
+<!-- === Home Section Ends === -->
+
+
+<div class="section">
+    <div class="title" id="lang">Demos</div>
+    
+    <div class="col">
+        <table width="100%" style="margin: 0pt 0pt; text-align: left;">
+        <tr>
+            <td><img src="images/scene0_car_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/scene2_car_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/scene3_car_small.gif" style="max-width: 90%;"></td>
+        </tr>
+        <tr>
+            <td><img src="images/scene5_car_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/scene13_car_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/scene14_car_small.gif" style="max-width: 90%;"></td>
+        </tr>
+        </table>
+    </div>
+    <p>
+        The vectorized HD Map predicted by our model. The red lines indicate lane boundary, the white ones indicate lane divider, and the yellow ones indicate ped crossing. We draw LiDAR point clouds over the map for visualization purpose.
+    </p>
+
+</div>
+
+
+<div class="section">
+    <div class="title" id="lang">Temporal Map Construction</div>
+        <div class="col">
+        <table width="100%" style="margin: 0pt 0pt; text-align: left;">
+        <tr>
+            <td><img src="images/temporal_12_small.gif" style="max-width: 95%;"></td>
+            <td><img src="images/temporal_14_small.gif" style="max-width: 95%;"></td>
+        </tr>
+        <tr>
+            <td><img src="images/temporal_89_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/temporal_118_small.gif" style="max-width: 90%;"></td>
+        </tr>
+        <tr>
+            <td><img src="images/temporal_148_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/temporal_43_small.gif" style="max-width: 90%;"></td>
+        </tr>
+        </table>
+    </div>
+    <p>
+        Long-term temporal accumulation by pasting feature maps of previous frames into current's according to ego poses. The feature maps are fused by max pooling and then fed into decoder.
+    </p>
+</div>
+
+<div class="section">
+    <div class="title" id="lang">Main Idea</div>
+    <img src="images/teaser_v3.png" style="max-width: 100%;">
+    <p>
+        <b>Main idea</b>. High-definition map (HD map) construction is a crucial problem for autonomous driving. This problem typically involves collecting high-quality point clouds, fusing multiple point clouds of the same scene, annotating map elements, and updating maps constantly. This pipeline, however, requires a vast amount of human efforts and resources which limits its scalability. In this paper, we argue that online map learning, which dynamically constructs the HD maps based on local sensor observations, is a more scalable way to provide semantic and geometry priors to self-driving vehicles than traditional pre-annotated HD maps. We introduce a strong online map learning method, titled HDMapNet.
+    </p>
+</div>
+
+<div class="section">
+    <div class="title" id="lang">Method</div>
+    <div class="logo" style="" align="center">
+        <img style="max-width: 100%;" src="images/overview_v3.png">
+    </div>
+    <p>
+        <b>The overview of HDMapNet</b>. Four neural network parameterize our model: a perspective view image encoder, a neural view transformer in image branch, a pillar-based point cloud encoder, and a map element decoder. The output of the map decoder has 3 branches: semantic segmentation, instance detection and direction classification, which are processed into vectorized HD map. 
+    </p>    
+</div>
+
+
+<div class="section">
+    <div class="title" id="lang">Related Projects on VCAD (Vision-Centric Autonomous Driving)</div>
+    <div class="col text-center">
+
+    <table width="100%" style="margin: 0pt 0pt; text-align: center;">
+    <tr>
+      <td>
+        <a href="#" class="d-inline-block p-3"><img height="100"
+          src="images/MUTR3D_paper_thumbnail.png" style="border:1px solid"
+          data-nothumb><br>DETR3D</a>
+      </td>
+      <td>
+        <a href="#" class="d-inline-block p-3"><img height="100"
+          src="images/MUTR3D_paper_thumbnail.png" style="border:1px solid"
+          data-nothumb><br>MUTR3D</a>
+      </td>
+      <td>
+      <a href="#" class="d-inline-block p-3"><img height="100"
+          src="images/MUTR3D_paper_thumbnail.png" style="border:1px solid"
+          data-nothumb><br>FUTR3D</a>
+      </td>
+
+    </tr>
+    </table>
+    </div>
+
+</div>
+
+<!-- === Reference Section Starts === -->
+<div class="section">
+    <div class="bibtex">
+       <div class="title" id="lang">Reference</div>
+    </div>
+
+<p>If you find our work useful in your research, please cite our paper:</p>
+<pre>
+@article{li2021hdmapnet,
+  title={HDMapNet: An Online HD Map Construction and Evaluation Framework},
+  author={Qi Li and Yue Wang and Yilun Wang and Hang Zhao},
+  journal={arXiv preprint arXiv:2107.06307},
+  year={2021}
+}
+</pre>
+    <!-- Adjust the frame size based on the demo (Every project differs). -->
+</div>
+
+</body>
+</html>
