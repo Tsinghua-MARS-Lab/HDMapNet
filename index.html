@@ -1,446 +1,205 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html lang="en">
 
-    <head>
-	<meta name="generator" content="Hugo 0.88.1" />
-        <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<meta name="description" content="An Online HD Map Construction and Evaluation Framework">
-<title>
-HDMapNet
-</title>
+<!-- === Header Starts === -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link href="/HDMapNet/index.xml" rel="alternate" type="application/rss+xml" title="HDMapNet" />
+    <title>HDMapNet</title>
 
-        
-        <meta property="og:title" content="HDMapNet" />
-<meta property="og:type" content="website" />
-<meta property="og:description" content="An Online HD Map Construction and Evaluation Framework"/>
-<meta property="og:url" content="https://tsinghua-mars-lab.github.io/HDMapNet/"/>
-<meta property="og:site_name" content="HDMapNet"/>
+    <link href="./assets/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="./assets/font.css" rel="stylesheet" type="text/css"> -->
+    <link href="./assets/style.css" rel="stylesheet" type="text/css">
 
+    <script src="./assets/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/corpus.js"></script>
 
+</head>
+<!-- === Header Ends === -->
 
+<script>
+    var lang_flag = 1;
+</script>
 
+<body>
 
+<!-- === Home Section Starts === -->
+<div class="section">
+    <!-- === Title Starts === -->
 
-
-        
-<link rel="shortcut icon" href="/HDMapNet/img/fav.ico">
-
-
-        
-
-
-
-
-
-<link rel="stylesheet" href="/HDMapNet/css/main.min.26071743d4271ad5521f6e5dfc001b715c45c630b49995a1e83327f23be2a062.css" integrity="sha256-JgcXQ9QnGtVSH25d/AAbcVxFxjC0mZWh6DMn8jvioGI=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-        
-
-
-<link rel="stylesheet" href="https://tsinghua-mars-lab.github.io/HDMapNet/styles/owlCarousel.min.b1f26e29c43c61fe8b5a6f225b4ee7c5f969a7b33cfe512706271e07246d93d1.css" integrity="sha256-sfJuKcQ8Yf6LWm8iW07nxflpp7M8/lEnBiceByRtk9E=" crossorigin="anonymous" media="screen">
-
-    </head>
-
-    <body>
-        
-        <section id="top" class="hero is-small">
-            
-            <div class="hero-head"></div>
-
-            
-            <div class="hero-body">
-                <div class="container has-text-centered">
-                    
-                    <h1 class="bold-title " style="font-size: 3em">
-                        HDMapNet
-                    </h1>
-                    <div class="subtitle is-3 ">
-                        <p>An Online HD Map Construction and Evaluation Framework</p>
-<DIV style="font-size: large">
-<br>
-<a href="https://liqi17thu.github.io/">Qi Li</a><sup>1</sup>, <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><sup>2</sup>, <a href="https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/">Yilun Wang</a><sup>3</sup>, <a href="http://people.csail.mit.edu/hangzhao/">Hang Zhao</a><sup>1</sup>
-<br>
-<br>
-<sup>1</sup>Tsinghua University &nbsp;&nbsp;&nbsp;&nbsp;<sup>2</sup>MIT &nbsp;&nbsp;&nbsp;&nbsp;<sup>3</sup>Li Auto
-<!-- <a href="mailto:liqi17@mails.tsinghua.edu.cn">liqi17@mails.tsinghua.edu.cn</a> -->
-<DIV>
-<br>
-<div class="social-icons" style="font-size:15px">
-    <a href="https://arxiv.org/abs/2107.06307/">
-        <i class="fas fab fa-sticky-note" style="font-size:35px"></i>ICRA 2022 (long version)
-    </a>
-    &nbsp;&nbsp;&nbsp;
-    <a href="https://drive.google.com/file/d/1CEX232SJIUDTPPIviSM_K47QkhV9_5ua/view">
-        <i class="fas fab fa-sticky-note" style="font-size:35px"></i>CVPR 2021 Workshop (best paper nominee)
-    </a>
-    &nbsp;&nbsp;&nbsp;
-    <a href="https://github.com/Tsinghua-MARS-Lab/HDMapNet">
-        <i class="fab fab fa-github" style="font-size: 35px"></i>Code
-    </a>
-</div>
-
-                    </div>
-                    
-                    
-                    
-                    
-                </div>
-            </div> 
-            
-
-            <div class="hero-foot ">
-                
-                
-<div class="container">
-    <hr>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        
-        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false" >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+    <!-- <div class="logo" style="padding-left: 120pt" align="top">
+        <a href="https://github.com/metadriverse/metadrive" target="_blank">
+            <img style=" width: 450pt;" src="images/metadrive.png">
         </a>
-        <div class="navbar-menu has-content-centered" id="navMenu">
-            
-            
-            
-            
+    </div> -->
 
-            
-            
-
-            
-
-            
-
-            
-            
-            
-            <a class="navbar-item" href="#demo">Demo</a>
-            
-            
-            
-            
-            
-            <a class="navbar-item" href="#temporal">Temporal Map Construction</a>
-            
-            
-            
-            
-            
-            
-            
-            <a class="navbar-item" href="#abstract">Main idea</a>
-            
-            
-            
-            
-            
-            <a class="navbar-item" href="#main_idea">Method</a>
-            
-            
-            
-            
-            
-            <a class="navbar-item" href="#result">Result</a>
-            
-            
-            
-            
-            
-            <a class="navbar-item" href="#youtube">VIDEO</a>
-            
-            
-            
-
-            
-            
-            <a class="navbar-item" href="#contact">Contact</a>
-            
-            
-
-            
-
-            
-            
+    <div class="header">
+        <div style="" class="title" id="lang">
+            <b>HDMapNet</b>: An Online HD Map Construction and Evaluation Framework
         </div>
-    </nav>
-    <hr>
+    </div>
+    <!-- === Title Ends === -->
+
+    <div class="author" style="margin-top: -10pt">
+        <a href="https://liqi17thu.github.io/">Qi Li</a><sup>1</sup>,&nbsp;
+        <a href="https://people.csail.mit.edu/yuewang/" target="_blank">Yue Wang</a><sup>2</sup>,&nbsp;
+        <a href="https://scholar.google.com.hk/citations?hl=en&user=nUyTDosAAAAJ">Yilun Wang</a><sup>3</sup>,&nbsp;
+        <a href="https://hangzhaomit.github.io/">Hang Zhao</a><sup>1</sup>&nbsp;
+    </div>
+
+    <div class="institution">
+        <div><sup>1</sup>Tsinghua University,
+            <sup>2</sup>MIT,
+            <sup>3</sup>Li Auto
+        </div>
+
+        <!-- <div class="social-icons">
+            <a href="https://arxiv.org/abs/2107.06307/">
+                <i class="fas fab fa-sticky-note"></i>ICRA 2022 (long version)
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="https://drive.google.com/file/d/1CEX232SJIUDTPPIviSM_K47QkhV9_5ua/view">
+                <i class="fas fab fa-sticky-note"></i>CVPR 2021 Workshop (best paper nominee)
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="https://github.com/Tsinghua-MARS-Lab/HDMapNet">
+                <i class="fab fab fa-github"></i>Code
+            </a>
+        </div> -->
+
+    </div>
+
+
+    <table border="0" align="center">
+        <tr>
+            <td align="center" style="padding: 0pt 0 15pt 0">
+                <a class="bar" href="https://arxiv.org/abs/2107.06307/"><b>ICRA 2022 (long version)</b></a> |
+                <a class="bar" href="https://drive.google.com/file/d/1CEX232SJIUDTPPIviSM_K47QkhV9_5ua/view"><b>CVPR 2021 Workshop (best paper nominee)</b></a> |
+                <a class="bar" href="https://github.com/Tsinghua-MARS-Lab/HDMapNet"><b>Code</b></a>
+            </td>
+        </tr>
+    </table>
+    
+     
+</div>
+<!-- === Home Section Ends === -->
+
+
+<div class="section">
+    <div class="title" id="lang">Demos</div>
+    
+    <div class="col">
+        <table width="100%" style="margin: 0pt 0pt; text-align: left;">
+        <tr>
+            <td><img src="images/scene0_car_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/scene2_car_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/scene3_car_small.gif" style="max-width: 90%;"></td>
+        </tr>
+        <tr  height="10"></tr>
+        <tr>
+            <td><img src="images/scene5_car_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/scene13_car_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/scene14_car_small.gif" style="max-width: 90%;"></td>
+        </tr>
+        </table>
+    </div>
+    <p>
+        The vectorized HD Map predicted by HDMapNet. Red line: lane boundary; White line: lane divider; Yellow line: pedestrian crossing. We overlay LiDAR point clouds over the map only for visualization purpose.
+    </p>
+
 </div>
 
 
-            </div>
-        </section> 
+<div class="section">
+    <div class="title" id="lang">Temporal Map Construction</div>
+        <div class="col">
+        <table width="100%" style="margin: 0pt 0pt; text-align: left;">
+        <tr>
+            <td><img src="images/temporal_12_small.gif" style="max-width: 95%;"></td>
+            <td><img src="images/temporal_14_small.gif" style="max-width: 95%;"></td>
+        </tr>
+        <tr>
+            <td><img src="images/temporal_89_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/temporal_118_small.gif" style="max-width: 90%;"></td>
+        </tr>
+        <tr>
+            <td><img src="images/temporal_148_small.gif" style="max-width: 90%;"></td>
+            <td><img src="images/temporal_43_small.gif" style="max-width: 90%;"></td>
+        </tr>
+        </table>
+    </div>
+    <p>
+        Long-term temporal accumulation by pasting feature maps of previous frames into current's according to ego poses. The feature maps are fused by max pooling and then fed into decoder.
+    </p>
+</div>
 
-        
-        
-        
+<div class="section">
+    <div class="title" id="lang">Main Idea</div>
+    <img src="images/teaser_v3.png" style="max-width: 100%;">
+    <p>
+        <b>Main idea</b>. High-definition map (HD map) construction is a crucial problem for autonomous driving. This problem typically involves collecting high-quality point clouds, fusing multiple point clouds of the same scene, annotating map elements, and updating maps constantly. This pipeline, however, requires a vast amount of human efforts and resources which limits its scalability. In this paper, we argue that online map learning, which dynamically constructs the HD maps based on local sensor observations, is a more scalable way to provide semantic and geometry priors to self-driving vehicles than traditional pre-annotated HD maps. We introduce a strong online map learning method, titled HDMapNet.
+    </p>
+</div>
 
-        
-
-        
-
-        
-        
-        
-        
-
-        
-        <div class="section" id="demo" style="padding: 0">
-            <div class="container">
-                <h2 class="title is-2 has-text-centered">Demo</h2>
-                
-                <div class="markdown has-text-centered">
-                    <table frame=void style="border:none; padding:0; margin:0; border-spacing:0; border-collapse: collapse">
-<tr style="padding:0; border-collapse: collapse">
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0;"><img src="images/scene0_car_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0;"><img src="images/scene2_car_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0;"><img src="images/scene3_car_small.gif"></td>
-</tr>
-<tr>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/scene5_car_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/scene13_car_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/scene14_car_small.gif"></td>
-</tr>
-</table>
-<DIV align="left">
-<b>The vectorized HD Map predicted by our model on nuScenes dataset.</b> The red lines indicate lane boundary, the white ones indicate lane divider, and the yellow ones indicate ped crossing. We draw LiDAR point clouds over the map for visualization purpose.<DIV>
-                </div>
-                
-            </div>
-            
-            
-        </div>
-        <div class="container">
-            <hr>
-        </div>
-        
-        
-        
-        
-        
-        
-        
-
-        
-        <div class="section" id="temporal" style="padding: 0">
-            <div class="container">
-                <h2 class="title is-2 has-text-centered">Temporal Map Construction</h2>
-                
-                <div class="markdown has-text-centered">
-                    <table frame=void style="border:none; padding:0; margin:0">
-<tr style="button-margin:0">
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_12_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_14_small.gif"></td>
-</tr>
-<tr>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_89_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_118_small.gif"></td>
-</tr>
-<tr>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_148_small.gif"></td>
-<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"><img src="images/temporal_43_small.gif"></td>
-</tr>
-</table>
-<DIV align="left">
-<b>Long-term temporal accumulation by pasting feature maps of previous frames into current's according to ego poses. The feature maps are fused by max pooling and then fed into decoder.<DIV>
-
-                </div>
-                
-            </div>
-            
-            
-        </div>
-        <div class="container">
-            <hr>
-        </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        <div class="section" id="abstract" style="padding: 0">
-            <div class="container">
-                <h2 class="title is-2 has-text-centered">Main idea</h2>
-                
-                <div class="markdown has-text-centered">
-                    <img src="images/teaser_v3.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
-<figcaption style="text-align:left">
-<b>Main idea</b>. High-definition map (HD map) construction is a crucial problem for autonomous driving. This problem typically involves collecting high-quality point clouds, fusing multiple point clouds of the same scene, annotating map elements, and updating maps constantly. This pipeline, however, requires a vast amount of human efforts and resources which limits its scalability. In this paper, we argue that online map learning, which dynamically constructs the HD maps based on local sensor observations, is a more scalable way to provide semantic and geometry priors to self-driving vehicles than traditional pre-annotated HD maps. We introduce a strong online map learning method, titled HDMapNet.
-</figcaption>
-</figure>
-                </div>
-                
-            </div>
-            
-            
-        </div>
-        <div class="container">
-            <hr>
-        </div>
-        
-        
-        
-        
-        
-        
-        
-
-        
-        <div class="section" id="main_idea" style="padding: 0">
-            <div class="container">
-                <h2 class="title is-2 has-text-centered">Method</h2>
-                
-                <div class="markdown has-text-centered">
-                    <figure>
-<img src="images/overview_v3.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
-<figcaption style="text-align:left">
-<b>The overview of HDMapNet</b>. Four neural network parameterize our model: a perspective view image encoder, a neural view transformer in image branch, a pillar-based point cloud encoder, and a map element decoder. The output of the map decoder has 3 branches: semantic segmentation, instance detection and direction classification, which are processed into vectorized HD map.
-</figcaption>
-</figure>
-
-                </div>
-                
-            </div>
-            
-            
-        </div>
-        <div class="container">
-            <hr>
-        </div>
-        
-        
-        
-        
-        
-        
-        
-
-        
-        <div class="section" id="result" style="padding: 0">
-            <div class="container">
-                <h2 class="title is-2 has-text-centered">Result</h2>
-                
-                <div class="markdown has-text-centered">
-                    <!-- 
-### Quantative results
-
-<figure>
-<img src="images/segmentation.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
-<figcaption style="text-align:left">
-<b>IoU scores(%) and Chamfer Distance(m) of semantic map segmentation.</b> CD<sub>P</sub> denotes the CD from label to prediction (equivalent to precision), CP<sub>L</sub> denotes the CD from Prediction to Label (equivalent to recall); CD is the average of them. *: the perspective view labels projected from 2D HD Maps.
-</figcaption>
-</figure>
-
-<br>
-<figure>
-<img src="images/instance.png" style="box-shadow: none !important; border: #000000; padding:0px; margin:0px">
-<figcaption style="text-align:left">
-<b>Instance detection results.</b> {0.2, 0.5, 1} are the predefined thresholds of Chamfer distance (e.g., a prediction is considierer a true positive if the Chamfer distance between label and prediction is lower than that threshold.) The mAP is the average of three APs.
-</figcaption>
-</figure>
-
-<br> 
--->
-<video controls preload="auto" width="100%"  autoplay loop playsinline class="html-video">
-    <source src="/HDMapNet/home/direction_3_car_short_small.mp4" type="video/mp4">
-  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="/HDMapNet/home/direction_3_car_short_small.mp4">download it</a> and watch it with your favorite video player!</p>
-</video>
-<DIV align="left">
-<b>The HD map construct demo on nuScenes dataset.</b> The left part is the corresonding 6 images, the right one is the HD map prediction. We align the LiDAR point clouds on it for visualization purpose.
-<DIV>
-<!-- <DIV align="left">
-We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM with bird's eye view encoder (IPM(B)), IPM with cam view encoder and bird's eye view encoder (IPM(CB)), <a href="https://arxiv.org/pdf/2008.05711.pdf">Lift-Splat-Shoot</a> and <a href="https://arxiv.org/pdf/1906.03560.pdf">View Prasing Network</a>.
-<DIV> -->
-<br>
-<figure>
-<img src="images/qualitative.png" style="padding:0px; margin:0px">
-<figcaption style="text-align:left">
-<b>The qualitative results on nuScenes dataset.</b> Top Left: we show the surrounding images and the ground-truth local HD Map annotations. IPM: we show the lane segmentation result in the perspective view and in the bird's-eye view. Others: we show the semantic segmentation results and the vectorized instance detection results. As we can see, Our HDMapNet(Surr) and HDMapNet(Fusion) outputs are close to the ground-truth HD Map and the fusion based HDMapNet is clearly the best.
-</figcaption>
-</figure>
-<br>
-                </div>
-                
-            </div>
-            
-            
-        </div>
-        <div class="container">
-            <hr>
-        </div>
-        
-        
-        
-        
-        
-        
-        
-
-        
-        <div class="section" id="youtube" style="padding: 0">
-            <div class="container">
-                <h2 class="title is-2 has-text-centered">VIDEO</h2>
-                
-                <div class="markdown has-text-centered">
-                    
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/AJ-rToTN8y8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+<div class="section">
+    <div class="title" id="lang">Method</div>
+    <div class="logo" style="" align="center">
+        <img style="max-width: 100%;" src="images/overview_v3.png">
+    </div>
+    <p>
+        <b>The overview of HDMapNet</b>. Four modules parameterize HDMapNet: a perspective view image encoder, a neural view transformer in image branch, a pillar-based point cloud encoder, and a map element decoder. The output of the map decoder has 3 branches: semantic segmentation, instance detection and direction classification, which are processed into vectorized HD map. 
+    </p>    
 </div>
 
 
-                </div>
-                
-            </div>
-            
-            
-        </div>
-        <div class="container">
-            <hr>
-        </div>
-        
-        
+<div class="section">
+    <div class="title" id="lang">More Results</div>
+    <div class="logo" style="" align="center">
+        <video controls preload="auto" width="100%"  autoplay loop playsinline class="html-video">
+            <source src="home/direction_3_car_short_small.mp4" type="video/mp4">
+            <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="/HDMapNet/home/direction_3_car_short_small.mp4">download it</a> and watch it with your favorite video player!</p>
+        </video>
+    </div>
+    <p>
+        On the left are 6 surround images, on the right is the predicted HD map. We overlay the LiDAR point clouds on it for visualization purpose.
+    </p>
 
+    <br>
+    <div class="logo" style="" align="center">
+        <img style="max-width: 100%;" src="images/qualitative.png">
+    </div>
+    <p>
+        <b>Comparison.</b> Top Left: surround-vew images and the ground-truth HD map. IPM: lane segmentation results in the perspective view and in the bird's-eye view. Others: semantic segmentation results and vectorized instance detection results. As we can see, HDMapNet(Surr) and HDMapNet(Fusion) are achieving outstanding performance.
+    </p> 
+</div>
 
-<div class="section" style="padding: 0;">
-    <div class="container">
-    <h2 class="title is-2 has-text-centered">VCAD Related Projects</h2>
+<div class="section">
+    <div class="title" id="lang">Talk</div>
+    <div class="logo" style="" align="center">
+       <iframe src="https://www.youtube.com/embed/AJ-rToTN8y8" style="max-width: 90%;" allowfullscreen title="YouTube Video"></iframe>
+    </div>
+</div>
+
+<div class="section">
+    <div class="title" id="lang">Related Projects on VCAD (Vision-Centric Autonomous Driving)</div>
     <div class="col text-center">
 
     <table width="100%" style="margin: 0pt 0pt; text-align: center;">
     <tr>
-      <td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0"> 
-        <a href="https://tsinghua-mars-lab.github.io/MUTR3D/" class="d-inline-block p-3">
-        <img height="100"
-          src="https://tsinghua-mars-lab.github.io/MUTR3D/images/MUTR3D_paper_thumbnail.png" style="border:1px solid" data-nothumb><br>MUTR3D</a>
-      </td>
-      <td  style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
-        <a href="#" class="d-inline-block p-3">
-        <img height="100"
-          src="https://tsinghua-mars-lab.github.io/MUTR3D/images/MUTR3D_paper_thumbnail.png" style="border:1px solid"
+      <td>
+        <a href="#" class="d-inline-block p-3"><img height="100"
+          src="images/MUTR3D_paper_thumbnail.png" style="border:1px solid"
           data-nothumb><br>DETR3D</a>
       </td>
-      <td  style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
-        <a href="https://tsinghua-mars-lab.github.io/FUTR3D/" class="d-inline-block p-3">
-        <img height="100"
-          src="https://tsinghua-mars-lab.github.io/MUTR3D/images/MUTR3D_paper_thumbnail.png" style="border:1px solid"
+      <td>
+        <a href="#" class="d-inline-block p-3"><img height="100"
+          src="images/MUTR3D_paper_thumbnail.png" style="border:1px solid"
+          data-nothumb><br>MUTR3D</a>
+      </td>
+      <td>
+      <a href="#" class="d-inline-block p-3"><img height="100"
+          src="images/MUTR3D_paper_thumbnail.png" style="border:1px solid"
           data-nothumb><br>FUTR3D</a>
       </td>
 
@@ -449,91 +208,23 @@ We compare our method against vanilla Inverse Perspective Mapping (IPM), IPM wit
     </div>
 </div>
 
-    
-</div>
-        <div class="container">
-            <hr>
-        </div>
-        
-        
-        
-        
-        
-        <div class="section" id="contact" style="padding: 0;">
-            <div class="container has-text-centered">
-                <h2 class="title is-2">Contact</h2>
-                <div class="markdown">
-                    <p>If you find our work useful in your research, please consider citing:</p>
-<blockquote style="text-align:left; background-color:#EEEEEE">
-@misc{li2021hdmapnet, <br>
-      title={HDMapNet: An Online HD Map Construction and Evaluation Framework}, <br>
-      author={Qi Li and Yue Wang and Yilun Wang and Hang Zhao}, <br>
-      year={2021}, <br>
-      eprint={2107.06307}, <br>
-      archivePrefix={arXiv}, <br>
-      primaryClass={cs.CV} <br>
-}
-</blockquote>
-<br>
-<DIV style="text-align:center">
-For more information, please contact: <a href="mailto:liqi17@mails.tsinghua.edu.cn">liqi17@mails.tsinghua.edu.cn</a>
-<DIV>
-                </div>
-                
-                <p>Local time:  <span id="time"></span>.</p>
-                
-                
-                
-            </div>
-            
-            
-        </div>
-        <div class="container">
-            <hr>
-        </div>
-        
-        
-        
-
-        <div class="section" id="footer">
-    <div class="container has-text-centered">
-    
-        <span class="footer-text">
-            
-        </span>
-    
+<!-- === Reference Section Starts === -->
+<div class="section">
+    <div class="bibtex">
+       <div class="title" id="lang">Reference</div>
     </div>
+
+<p>If you find our work useful in your research, please cite our paper:</p>
+<pre>
+@article{li2021hdmapnet,
+  title={HDMapNet: An Online HD Map Construction and Evaluation Framework},
+  author={Qi Li and Yue Wang and Yilun Wang and Hang Zhao},
+  journal={arXiv preprint arXiv:2107.06307},
+  year={2021}
+}
+</pre>
+    <!-- Adjust the frame size based on the demo (Every project differs). -->
 </div>
 
-
-        
-        
-
-
-<script src="https://tsinghua-mars-lab.github.io/HDMapNet/js/bundle.f1741e9868b2f697e71cf8fccfcc12166540999b3d36f8fb9edd0882ba425d55.js" integrity="sha256-8XQemGiy9pfnHPj8z8wSFmVAmZs9Nvj7nt0IgrpCXVU="></script>
-
-
-
-
-
-
-        
-
-
-<script src="https://tsinghua-mars-lab.github.io/HDMapNet/js/bundleOwlCarousel.bc6b73f0a36bf19c70c5df8fc352d322988ca2bc40743fb836ee7371d555c28a.js" integrity="sha256-vGtz8KNr8Zxwxd&#43;Pw1LTIpiMorxAdD&#43;4Nu5zcdVVwoo="></script>
-
-
-        
-        <script>
-            function update_localtime() {
-                const time = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia\/Shanghai', timeStyle: 'short' });
-                document.getElementById('time').innerHTML = time;
-            }
-            update_localtime();
-            
-            setInterval(update_localtime, 1000);
-        </script>
-        
-    </body>
-
+</body>
 </html>
