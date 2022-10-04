@@ -9,6 +9,7 @@ from nuscenes.utils.splits import create_splits_scenes
 
 from torch.utils.data import Dataset
 from data.rasterize import preprocess_map
+from mono.utils import fov_postprocess
 from .const import CAMS, NUM_CLASSES, IMG_ORIGIN_H, IMG_ORIGIN_W
 from .vector_map import VectorizedLocalMap
 from .lidar import get_lidar_data
@@ -18,19 +19,20 @@ from model.voxel import pad_or_trim_to_np
 
 
 class HDMapNetDataset(Dataset):
-    def __init__(self, version, dataroot, data_conf, is_train):
+    def __init__(self, version, dataroot, data_conf, is_train, is_mono=False):
         super(HDMapNetDataset, self).__init__()
         patch_h = data_conf['ybound'][1] - data_conf['ybound'][0]
         patch_w = data_conf['xbound'][1] - data_conf['xbound'][0]
         canvas_h = int(patch_h / data_conf['ybound'][2])
         canvas_w = int(patch_w / data_conf['xbound'][2])
         self.is_train = is_train
+        self.is_mono = is_mono
         self.data_conf = data_conf
         self.patch_size = (patch_h, patch_w)
         self.canvas_size = (canvas_h, canvas_w)
         self.nusc = NuScenes(version=version, dataroot=dataroot, verbose=False)
         self.vector_map = VectorizedLocalMap(dataroot, patch_size=self.patch_size, canvas_size=self.canvas_size)
-        self.scenes = self.get_scenes(version, is_train)
+        self.scenes = self.get_scenes(version, is_train)[:1]
         self.samples = self.get_samples()
 
     def __len__(self):
@@ -109,8 +111,30 @@ class HDMapNetDataset(Dataset):
     #         rotate = 0
     #     return resize, resize_dims, crop, flip, rotate
 
+    def _get_img(self, rec, cam):
+        samp = self.nusc.get('sample_data', rec['data'][cam])
+        imgname = os.path.join(self.nusc.dataroot, samp['filename'])
+        img = Image.open(imgname)
+
+        resize, resize_dims = self.sample_augmentation()
+        img, post_rot, post_tran = img_transform(img, resize, resize_dims)
+        # resize, resize_dims, crop, flip, rotate = self.sample_augmentation()
+        # img, post_rot, post_tran = img_transform(img, resize, resize_dims, crop, flip, rotate)
+
+        img = normalize_img(img)
+
+        sens = self.nusc.get('calibrated_sensor', samp['calibrated_sensor_token'])
+        tran = torch.Tensor(sens['translation'])
+        rot = torch.Tensor(Quaternion(sens['rotation']).rotation_matrix)
+        intrin = torch.Tensor(sens['camera_intrinsic'])
+
+        return img, tran, rot, intrin, post_tran, post_rot
 
     def get_imgs(self, rec):
+        if self.is_mono:
+            img, tran, rot, intrin, post_tran, post_rot = self._get_img(rec, cam='CAM_FRONT')
+            return torch.stack([img]), torch.stack([tran]), torch.stack([rot]), torch.stack([intrin]), torch.stack([post_tran]), torch.stack([post_rot])
+
         imgs = []
         trans = []
         rots = []
@@ -119,24 +143,14 @@ class HDMapNetDataset(Dataset):
         post_rots = []
 
         for cam in CAMS:
-            samp = self.nusc.get('sample_data', rec['data'][cam])
-            imgname = os.path.join(self.nusc.dataroot, samp['filename'])
-            img = Image.open(imgname)
-
-            resize, resize_dims = self.sample_augmentation()
-            img, post_rot, post_tran = img_transform(img, resize, resize_dims)
-            # resize, resize_dims, crop, flip, rotate = self.sample_augmentation()
-            # img, post_rot, post_tran = img_transform(img, resize, resize_dims, crop, flip, rotate)
-
-            img = normalize_img(img)
+            img, tran, rot, intrin, post_tran, post_rot = self._get_img(rec, cam)
+            
+            imgs.append(img)
             post_trans.append(post_tran)
             post_rots.append(post_rot)
-            imgs.append(img)
-
-            sens = self.nusc.get('calibrated_sensor', samp['calibrated_sensor_token'])
-            trans.append(torch.Tensor(sens['translation']))
-            rots.append(torch.Tensor(Quaternion(sens['rotation']).rotation_matrix))
-            intrins.append(torch.Tensor(sens['camera_intrinsic']))
+            intrins.append(intrin)
+            trans.append(tran)
+            rots.append(rot)
         return torch.stack(imgs), torch.stack(trans), torch.stack(rots), torch.stack(intrins), torch.stack(post_trans), torch.stack(post_rots)
 
     def get_vectors(self, rec):
@@ -156,14 +170,19 @@ class HDMapNetDataset(Dataset):
 
 
 class HDMapNetSemanticDataset(HDMapNetDataset):
-    def __init__(self, version, dataroot, data_conf, is_train):
-        super(HDMapNetSemanticDataset, self).__init__(version, dataroot, data_conf, is_train)
+    def __init__(self, version, dataroot, data_conf, is_train, is_mono=False):
+        super(HDMapNetSemanticDataset, self).__init__(version, dataroot, data_conf, is_train, is_mono)
         self.thickness = data_conf['thickness']
         self.angle_class = data_conf['angle_class']
+
+    def _mono_wrap(self, masks):
+        return fov_postprocess(masks, self.data_conf['xbound'], self.data_conf['ybound'])
 
     def get_semantic_map(self, rec):
         vectors = self.get_vectors(rec)
         instance_masks, forward_masks, backward_masks = preprocess_map(vectors, self.patch_size, self.canvas_size, NUM_CLASSES, self.thickness, self.angle_class)
+        if (self.is_mono):
+            instance_masks, forward_masks, backward_masks = self._mono_wrap(instance_masks), self._mono_wrap(forward_masks), self._mono_wrap(backward_masks)
         semantic_masks = instance_masks != 0
         semantic_masks = torch.cat([(~torch.any(semantic_masks, axis=0)).unsqueeze(0), semantic_masks])
         instance_masks = instance_masks.sum(0)

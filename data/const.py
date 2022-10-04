@@ -10,3 +10,13 @@ CLASS2LABEL = {
 NUM_CLASSES = 3
 IMG_ORIGIN_H = 900
 IMG_ORIGIN_W = 1600
+
+# FOV angles in degree
+FOV_ANGLES = {
+    'CAM_FRONT_LEFT': {'fov': 70, 'offset': 55},
+    'CAM_FRONT': {'fov': 70, 'offset': 0},
+    'CAM_FRONT_RIGHT': {'fov': 70, 'offset': -55},
+    'CAM_BACK_LEFT': {'fov': 70, 'offset': 110},
+    'CAM_BACK': {'fov': 110, 'offset': 180},
+    'CAM_BACK_RIGHT': {'fov': 70, 'offset': -110}
+}

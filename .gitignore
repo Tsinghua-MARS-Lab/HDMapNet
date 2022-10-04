@@ -28,3 +28,6 @@ __pycache__/
 *.ply
 *.zip
 
+# test & cache
+t.*
+cache/
