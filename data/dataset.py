@@ -162,7 +162,7 @@ class HDMapNetSemanticDataset(HDMapNetDataset):
         self.angle_class = data_conf['angle_class']
 
     def get_semantic_map(self, rec):
-        vectors = self.get_vectors(rec)
+        vectors = self.get_vectors(rec) #以自身为参照系下的向量值
         instance_masks, forward_masks, backward_masks = preprocess_map(vectors, self.patch_size, self.canvas_size, NUM_CLASSES, self.thickness, self.angle_class)
         semantic_masks = instance_masks != 0
         semantic_masks = torch.cat([(~torch.any(semantic_masks, axis=0)).unsqueeze(0), semantic_masks])
@@ -190,6 +190,25 @@ def semantic_dataset(version, dataroot, data_conf, bsz, nworkers):
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=bsz, shuffle=False, num_workers=nworkers)
     return train_loader, val_loader
 
+def semantic_dataset_ddp(version, dataroot, data_conf, bsz, nworkers):
+    train_dataset = HDMapNetSemanticDataset(version, dataroot, data_conf, is_train=True)
+    val_dataset = HDMapNetSemanticDataset(version, dataroot, data_conf, is_train=False)
+
+    # 给每个rank对应的进程分配训练的样本索引
+    train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
+    val_sampler = torch.utils.data.distributed.DistributedSampler(val_dataset)
+    train_batch_sampler = torch.utils.data.BatchSampler(train_sampler, bsz, drop_last=True)
+    train_loader = torch.utils.data.DataLoader(train_dataset,
+                                               batch_sampler=train_batch_sampler,
+                                               pin_memory=True,
+                                               num_workers=nworkers)
+
+    val_loader = torch.utils.data.DataLoader(val_dataset,
+                                             batch_size=bsz,
+                                             sampler=val_sampler,
+                                             pin_memory=True,
+                                             num_workers=nworkers)
+    return train_loader, val_loader
 
 if __name__ == '__main__':
     data_conf = {
